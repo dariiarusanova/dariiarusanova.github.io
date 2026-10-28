@@ -14,9 +14,9 @@
 <meta property="og:title" content="Дария Русанова - QA Lead в travel‑tech">
 <meta property="og:description" content="Тестирование, документация и QA-процессы для B2C и B2B продуктов">
 <meta property="og:url" content="https://dariiarusanova.github.io/">
-<meta property="og:image" content="https://dariiarusanova.github.io/assets/og.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="627">
+<meta property="og:image" content="https://dariiarusanova.github.io/assets/og.jpg">
+<meta property="og:image:width" content="2400">
+<meta property="og:image:height" content="1254">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" href="/assets/avatar.png">
 <link rel="apple-touch-icon" href="/assets/avatar.png">
@@ -133,6 +133,9 @@
   .ti{width:16px;height:16px;flex:none;background:var(--accent);-webkit-mask:var(--i) center/contain no-repeat;mask:var(--i) center/contain no-repeat}
   .tools h3{margin:0}
   .tools-sub{margin-top:18px}
+  .edu-chips{margin:0}
+  .edu-chips li{font-weight:500}
+  .langs-title{margin:24px 0 0}
   .reveal{opacity:0}
   .reveal.in{opacity:1;animation:rise .6s cubic-bezier(.2,.7,.2,1) backwards}
   @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
@@ -350,7 +353,28 @@
   </div>
 </section>
 
-<section id="reviews">
+<section id="education">
+  <div class="container">
+    <div class="sec-head"><h2>Образование</h2></div>
+    <div class="grid g2">
+      <div class="card group">
+        <div class="group-title">Высшее</div>
+          <div class="sk"><h3>Geekbrains</h3><p class="muted">IT, тестирование ПО</p></div>
+          <div class="sk"><h3>ИИП</h3><p class="muted">Психология, психолог</p></div>
+          <div class="sk"><h3>Московский психолого-социальный университет</h3><p class="muted">Социально-культурный сервис и туризм, специалист по сервису и туризму</p></div>
+          <div class="sk"><h3>Московский психолого-социальный университет</h3><p class="muted">Психология, бакалавр психологии</p></div>
+      </div>
+      <div class="card group">
+        <div class="group-title">Курсы и сертификаты</div>
+        <ul class="chips edu-chips"><li>ITEA - Тестирование ПО</li><li>Базовые навыки SQL</li><li>Базы данных</li><li>Компьютерные сети</li><li>Git</li><li>Jira и Confluence</li><li>Тестирование веб-приложений</li><li>Управление клиентским опытом</li><li>Java core для тестировщиков</li><li>HTML/CSS для тестировщиков</li><li>Базовые команды Linux</li><li>Основы ручного тестирования</li><li>Основы тест-аналитики</li></ul>
+        <div class="group-title langs-title">Языки</div>
+        <ul class="chips"><li>Русский - родной</li><li>Английский - B2</li><li>Испанский - A1</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews" class="alt">
   <div class="container">
     <div class="sec-head"><h2>Отзывы</h2></div>
     <div class="grid g3">
@@ -361,7 +385,7 @@
   </div>
 </section>
 
-<section id="contacts" class="alt">
+<section id="contacts">
   <div class="container">
     <div class="sec-head"><h2>Контакты</h2></div>
     <div class="contacts">
