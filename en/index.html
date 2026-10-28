@@ -84,8 +84,8 @@
   .btn:hover{background:var(--accent-hover);border-color:var(--accent-hover);color:var(--on-accent);transform:translateY(-1px)}
   .btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
   .btn.ghost:hover{background:var(--surface-2);color:var(--ink)}
-  .photo{position:relative;aspect-ratio:4/5;border-radius:28px;overflow:hidden;box-shadow:var(--shadow);background:var(--surface-2)}
-  .photo img{width:100%;height:100%;object-fit:cover;object-position:50% 25%}
+  .photo{position:relative;aspect-ratio:5/4;border-radius:28px;overflow:hidden;box-shadow:var(--shadow);background:var(--surface-2)}
+  .photo img{width:100%;height:100%;object-fit:cover;object-position:50% 50%}
   .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:44px;max-width:560px}
   .stat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
   .stat b{display:block;font-size:24px;font-weight:800;letter-spacing:-.02em}
@@ -93,7 +93,7 @@
   @media (max-width:860px){
     .hero{padding:40px 0 64px}
     .hero-grid{grid-template-columns:1fr;gap:36px}
-    .photo{aspect-ratio:1/1;max-width:420px;order:-1}
+    .photo{aspect-ratio:5/4;max-width:560px;order:-1}
   }
   @media (max-width:480px){.stat{padding:12px}.stat b{font-size:19px}}
 
@@ -253,7 +253,7 @@
         <div class="stat"><b>B2C &amp; B2B</b><span>products</span></div>
       </div>
     </div>
-    <div class="photo"><img src="/assets/photo.jpg" alt="Dariia Rusanova" width="954" height="1280"></div>
+    <div class="photo"><img src="/assets/photo.jpg" alt="Dariia Rusanova" width="1200" height="960"></div>
   </div>
 </div>
 
