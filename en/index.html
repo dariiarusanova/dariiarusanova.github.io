@@ -56,14 +56,15 @@
   .logo-mark{display:block;height:38px;aspect-ratio:498/71;background:var(--accent);-webkit-mask:url(/assets/logo.webp) center/contain no-repeat;mask:url(/assets/logo.webp) center/contain no-repeat}
   @media (max-width:480px){.logo-mark{height:30px}}
   .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-  .menu{display:flex;gap:6px;list-style:none;margin:0;padding:0}
-  .menu a{color:var(--ink);font-weight:500;font-size:15px;padding:8px 12px;border-radius:999px;transition:background .2s}
+  .menu{display:flex;gap:2px;list-style:none;margin:0;padding:0}
+  .menu a{color:var(--ink);font-weight:500;font-size:15px;padding:8px 11px;white-space:nowrap;border-radius:999px;transition:background .2s}
   .menu a:hover{background:var(--surface-2);color:var(--ink)}
+  .menu a.active{background:var(--accent-soft);color:var(--accent)}
   .lang{font-weight:700;font-size:14px;border:1px solid var(--line);border-radius:999px;padding:7px 14px;color:var(--ink);margin-left:12px}
   .lang:hover{background:var(--surface-2);color:var(--ink)}
   .nav-right{display:flex;align-items:center}
   .burger{display:none;background:none;border:0;font-size:24px;cursor:pointer;color:var(--ink);padding:6px}
-  @media (max-width:900px){
+  @media (max-width:1200px){
     .burger{display:block}
     .menu{display:none;position:absolute;top:68px;left:0;right:0;background:var(--bg);flex-direction:column;padding:8px 16px 16px;border-bottom:1px solid var(--line)}
     .menu.open{display:flex}
@@ -97,7 +98,8 @@
   @media (max-width:480px){.stat{padding:12px}.stat b{font-size:19px}}
 
   /* Sections */
-  section{padding:88px 0;scroll-margin-top:68px}
+  section{padding:88px 0;scroll-margin-top:8px}
+  @media (max-width:860px){section{padding:64px 0;scroll-margin-top:32px}}
   section.alt{background:var(--surface-2)}
   .sec-head{margin-bottom:40px;max-width:720px}
   .sec-head .label{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
@@ -137,6 +139,7 @@
   .edu-chips li{font-weight:500}
   .langs-title{margin:24px 0 0}
   .reveal{opacity:0}
+  .reveal.instant{animation:none!important}
   .reveal.in{opacity:1;animation:rise .6s cubic-bezier(.2,.7,.2,1) backwards}
   @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
   .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px;transition:transform .2s,box-shadow .2s}
@@ -225,6 +228,7 @@
       <li><a href="#cases">Cases</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#projects">Projects</a></li>
+      <li><a href="#education">Education</a></li>
       <li><a href="#reviews">Testimonials</a></li>
       <li><a href="#contacts">Contacts</a></li>
     </ul>
@@ -605,17 +609,47 @@
 
   // Reveal blocks on scroll
   (function(){
-    if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    var els = document.querySelectorAll('section .sec-head, section .card, .profile-text');
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if (!e.isIntersecting) return;
-        var sib = Array.prototype.indexOf.call(e.target.parentElement.children, e.target);
-        e.target.style.animationDelay = Math.min(sib, 5) * 70 + 'ms';
-        e.target.classList.add('in'); io.unobserve(e.target);
+    var io = null;
+    if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      var els = document.querySelectorAll('section .sec-head, section .card, .profile-text');
+      io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (!e.isIntersecting) return;
+          var sib = Array.prototype.indexOf.call(e.target.parentElement.children, e.target);
+          e.target.style.animationDelay = Math.min(sib, 5) * 70 + 'ms';
+          e.target.classList.add('in'); io.unobserve(e.target);
+        });
+      }, {rootMargin: '0px 0px -8% 0px'});
+      els.forEach(function(el){ el.classList.add('reveal'); io.observe(el); });
+    }
+
+    // Menu jump: target section is shown at once, no empty screen during animation
+    var links = Array.prototype.slice.call(document.querySelectorAll('.menu a[href^="#"]'));
+    function showNow(sec){
+      if (!sec) return;
+      sec.querySelectorAll('.reveal').forEach(function(el){
+        el.classList.add('in','instant'); if (io) io.unobserve(el);
       });
-    }, {rootMargin: '0px 0px -8% 0px'});
-    els.forEach(function(el){ el.classList.add('reveal'); io.observe(el); });
+    }
+    links.forEach(function(a){
+      a.addEventListener('click', function(){ showNow(document.querySelector(a.getAttribute('href'))); });
+    });
+    if (location.hash) showNow(document.querySelector(location.hash));
+
+    // Scroll-spy: highlight the section whose heading is just under the header
+    var secs = Array.prototype.slice.call(document.querySelectorAll('section[id]')).filter(function(x){ return map(x.id); });
+    function map(id){ for (var i=0;i<links.length;i++) if (links[i].getAttribute('href') === '#'+id) return links[i]; return null; }
+    var ticking = false;
+    function spy(){
+      ticking = false;
+      var cur = null, line = 160;
+      secs.forEach(function(x){ if (x.getBoundingClientRect().top <= line) cur = x; });
+      if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) cur = secs[secs.length-1];
+      links.forEach(function(l){ l.classList.remove('active'); });
+      if (cur) map(cur.id).classList.add('active');
+    }
+    addEventListener('scroll', function(){ if (!ticking) { ticking = true; requestAnimationFrame(spy); } }, {passive:true});
+    spy();
   })();
 </script>
 </body>
