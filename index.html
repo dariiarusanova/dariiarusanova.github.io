@@ -5,26 +5,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Дария Русанова - QA Lead в travel‑tech</title>
 <meta name="description" content="Тестирование, документация и QA-процессы для B2C и B2B продуктов">
-<meta name="theme-color" content="#FAF8F5" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0F1215" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F3F4F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0E1716" media="(prefers-color-scheme: dark)">
 <link rel="alternate" hreflang="ru" href="https://dariiarusanova.github.io/">
 <link rel="alternate" hreflang="en" href="https://dariiarusanova.github.io/en/">
+<link rel="icon" type="image/png" href="/assets/avatar.png">
+<link rel="apple-touch-icon" href="/assets/avatar.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#FAF8F5; --surface:#FFFFFF; --surface-2:#F2EFEA; --line:#E7E2DA;
-    --ink:#16181D; --muted:#5C626C;
-    --accent:#0E7C76; --accent-hover:#0A635E; --accent-soft:#DCEFEC; --on-accent:#FFFFFF;
+    --bg:#F3F4F1; --surface:#FFFFFF; --surface-2:#E8ECE7; --line:#D9DFD7;
+    --ink:#12201F; --muted:#4E5D5B;
+    --accent:#1F6F6B; --accent-hover:#185955; --accent-soft:#DAEAE7; --on-accent:#FFFFFF; --marker:#E8735A;
     --star:#E3A21A; --danger:#C2412D; --danger-soft:#F8E1DC;
     --radius:18px; --shadow:0 1px 2px rgba(22,24,29,.04),0 8px 24px rgba(22,24,29,.06);
   }
   @media (prefers-color-scheme: dark){
     :root{
-      --bg:#0F1215; --surface:#171B20; --surface-2:#1D2228; --line:#2A3038;
-      --ink:#EDEFF2; --muted:#A0A8B2;
-      --accent:#4FC3B7; --accent-hover:#6FD3C8; --accent-soft:#143532; --on-accent:#0F1215;
+      --bg:#0E1716; --surface:#152120; --surface-2:#192826; --line:#263634;
+      --ink:#ECEFEA; --muted:#9FB0AD;
+      --accent:#5DBFB6; --accent-hover:#7ACFC7; --accent-soft:#163432; --on-accent:#0E1716; --marker:#F08C74;
       --danger:#FF8A73; --danger-soft:#3A1C17;
       --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
     }
@@ -41,7 +43,10 @@
   /* Header */
   header{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid var(--line)}
   .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
-  .logo img{height:38px;width:auto}
+  .logo{display:block;line-height:0}
+  .logo-mark{display:block;height:38px;aspect-ratio:498/71;background:var(--accent);-webkit-mask:url(/assets/logo.webp) center/contain no-repeat;mask:url(/assets/logo.webp) center/contain no-repeat}
+  @media (max-width:480px){.logo-mark{height:30px}}
+  .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
   .menu{display:flex;gap:6px;list-style:none;margin:0;padding:0}
   .menu a{color:var(--ink);font-weight:500;font-size:15px;padding:8px 12px;border-radius:999px;transition:background .2s}
   .menu a:hover{background:var(--surface-2);color:var(--ink)}
@@ -60,7 +65,7 @@
   .hero{padding:72px 0 88px}
   .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
   .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);padding:6px 14px;border-radius:999px;margin-bottom:22px}
-  .eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent)}
+  .eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--marker)}
   .hero h1{font-size:clamp(40px,6vw,72px);line-height:1.05;letter-spacing:-.03em;margin:0 0 22px;font-weight:800}
   .hero h1 span{color:var(--accent)}
   .hero p.lead{font-size:clamp(17px,2vw,20px);color:var(--muted);max-width:520px;margin:0 0 34px}
@@ -70,7 +75,7 @@
   .btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
   .btn.ghost:hover{background:var(--surface-2);color:var(--ink)}
   .photo{position:relative;aspect-ratio:4/5;border-radius:28px;overflow:hidden;box-shadow:var(--shadow);background:var(--surface-2)}
-  .photo img{width:100%;height:100%;object-fit:cover;object-position:68% 30%}
+  .photo img{width:100%;height:100%;object-fit:cover;object-position:50% 25%}
   .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:44px;max-width:560px}
   .stat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
   .stat b{display:block;font-size:24px;font-weight:800;letter-spacing:-.02em}
@@ -96,6 +101,7 @@
   .g4{grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
   .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px;transition:transform .2s,box-shadow .2s}
   .card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+  .form-card:hover{transform:none}
   .icon{width:48px;height:48px;border-radius:14px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;margin-bottom:18px}
   .icon svg{width:24px;height:24px}
 
@@ -144,6 +150,19 @@
   .counter{font-size:12px;color:var(--muted);margin-left:auto;white-space:nowrap}
   .counter.limit{color:var(--danger)}
   .req-note{font-size:13px;color:var(--muted);margin:0}
+  .field label{font-size:14px;font-weight:600;margin-bottom:2px}
+  .req{color:var(--marker);font-weight:700}
+  .form-card form{display:grid;gap:14px}
+  .form-card form[hidden]{display:none}
+  .sent{display:grid;justify-items:center;text-align:center;gap:12px;padding:40px 12px}
+  .sent[hidden]{display:none}
+  .sent-icon{width:72px;height:72px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;animation:fly .6s ease-out}
+  .sent-icon svg{width:32px;height:32px}
+  .sent h3{font-size:22px;margin:4px 0 0}
+  .sent .muted{max-width:340px}
+  @keyframes fly{from{transform:translate(-18px,18px) scale(.6);opacity:0}to{transform:none;opacity:1}}
+  #form-status.error{color:var(--danger)}
+
   form .btn:disabled{opacity:.45;cursor:not-allowed;transform:none;background:var(--accent);border-color:var(--accent)}
 
   footer{padding:32px 0;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
@@ -157,7 +176,7 @@
 
 <header>
   <div class="container nav">
-    <a class="logo" href="#page-top"><img src="https://files.cdn-files-a.com/uploads/10575377/400_6ae11fb68e819.png" alt="Дария Русанова"></a>
+    <a class="logo" href="#page-top"><span class="logo-mark" aria-hidden="true"></span><span class="sr-only">Дария Русанова</span></a>
     <div class="nav-right">
     <button class="burger" aria-label="Меню" onclick="document.querySelector('.menu').classList.toggle('open')">&#9776;</button>
     <ul class="menu" onclick="this.classList.remove('open')">
@@ -190,7 +209,7 @@
         <div class="stat"><b>B2C и B2B</b><span>продукты</span></div>
       </div>
     </div>
-    <div class="photo"><img src="https://files.cdn-files-a.com/uploads/10575377/2000_67f2c64a7c93a_filter_67f2c6916b37b.jpg" alt="Дария Русанова"></div>
+    <div class="photo"><img src="/assets/photo.jpg" alt="Дария Русанова" width="954" height="1280"></div>
   </div>
 </div>
 
@@ -305,30 +324,42 @@
           <a href="https://t.me/dariiarus" target="_blank" rel="noopener" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3 18.6 20c-.2 1.1-.9 1.4-1.8.9l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.2-8.3c.4-.4-.1-.6-.6-.2L6.1 13.6 1.2 12c-1.1-.3-1.1-1.1.2-1.6L20.5 3c.9-.3 1.7.2 1.4 1.3z"/></svg></a>
         </div>
       </div>
-      <form id="contact-form" class="card" novalidate>
+      <div class="card form-card">
+      <form id="contact-form" novalidate>
         <div class="row">
           <div class="field">
-            <input type="text" name="name" placeholder="Имя" maxlength="90" autocomplete="name" aria-describedby="err-name">
+            <label for="f-name">Имя</label>
+            <input id="f-name" type="text" name="name" placeholder="Как к вам обращаться" maxlength="90" autocomplete="name" aria-describedby="err-name">
             <p class="err" id="err-name" aria-live="polite"></p>
           </div>
           <div class="field">
-            <input type="tel" name="phone" placeholder="Телефон" maxlength="12" inputmode="tel" autocomplete="tel" aria-describedby="err-phone">
+            <label for="f-phone">Телефон</label>
+            <input id="f-phone" type="tel" name="phone" placeholder="+7" maxlength="12" inputmode="tel" autocomplete="tel" aria-describedby="err-phone">
             <p class="err" id="err-phone" aria-live="polite"></p>
           </div>
         </div>
         <div class="field">
-          <input type="email" name="email" placeholder="Email *" maxlength="254" autocomplete="email" required aria-required="true" aria-describedby="err-email">
+          <label for="f-email">Email <span class="req" aria-hidden="true">*</span></label>
+          <input id="f-email" type="email" name="email" placeholder="name@mail.ru" maxlength="254" autocomplete="email" required aria-required="true" aria-describedby="err-email">
           <p class="err" id="err-email" aria-live="polite"></p>
         </div>
         <div class="field">
-          <textarea name="message" placeholder="Сообщение *" maxlength="499" required aria-required="true" aria-describedby="err-message"></textarea>
+          <label for="f-message">Сообщение <span class="req" aria-hidden="true">*</span></label>
+          <textarea id="f-message" name="message" placeholder="Коротко о задаче или вопросе" maxlength="499" required aria-required="true" aria-describedby="err-message"></textarea>
           <div class="field-foot"><p class="err" id="err-message" aria-live="polite"></p><span class="counter" id="msg-counter">0/499</span></div>
         </div>
         <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
-        <p class="req-note">* - обязательные поля</p>
+        <p class="req-note"><span class="req">*</span> - обязательные поля</p>
         <button class="btn" type="submit" disabled>Отправить</button>
         <p id="form-status" role="status"></p>
       </form>
+      <div class="sent" id="form-sent" hidden>
+        <div class="sent-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/></svg></div>
+        <h3 id="sent-title">Сообщение уже в пути</h3>
+        <p class="muted" id="sent-text">Спасибо за интерес! Ответ придёт на указанный email в ближайшее время.</p>
+        <button class="btn ghost" type="button" id="send-more">Написать ещё</button>
+      </div>
+      </div>
     </div>
   </div>
 </section>
@@ -365,7 +396,7 @@
         email: 'Введите корректный email, например name@mail.ru',
         sql: 'Похоже на SQL-код - такое сообщение отправить нельзя',
         sending: 'Отправляем...',
-        ok: 'Спасибо! Сообщение отправлено.',
+        activate: 'Форма ещё не активирована: на почту владельца сайта отправлено письмо для активации FormSubmit.',
         fail: 'Не удалось отправить. Напишите, пожалуйста, на dariiarusanova@gmail.com',
         subject: 'Сообщение с сайта',
         keys: ['Имя', 'Телефон', 'Email', 'Сообщение']
@@ -377,7 +408,7 @@
         email: 'Enter a valid email, e.g. name@mail.com',
         sql: 'This looks like SQL code - the message cannot be sent',
         sending: 'Sending...',
-        ok: 'Thank you! Your message has been sent.',
+        activate: 'The form is not activated yet: an activation email from FormSubmit has been sent to the site owner.',
         fail: 'Could not send the message. Please email dariiarusanova@gmail.com',
         subject: 'Message from website (EN)',
         keys: ['Name', 'Phone', 'Email', 'Message']
@@ -385,6 +416,8 @@
     }[document.documentElement.lang] ;
 
     var f = document.getElementById('contact-form');
+    var sent = document.getElementById('form-sent');
+    document.getElementById('send-more').addEventListener('click', function(){ sent.hidden = true; f.hidden = false; f.name.focus(); update(); });
     var btn = f.querySelector('button[type=submit]');
     var st = document.getElementById('form-status');
     var counter = document.getElementById('msg-counter');
@@ -463,22 +496,27 @@
       if (f._honey.value) return;
       var ok = ['name','phone','email','message'].map(function(n){ return show(n, true); }).every(Boolean);
       if (!ok) { update(); return; }
-      btn.disabled = true; st.textContent = M.sending;
+      btn.disabled = true; st.className = ''; st.textContent = M.sending;
       var data = { _subject: M.subject, _template: 'table' };
       data[M.keys[0]] = f.name.value.trim();
       data[M.keys[1]] = f.phone.value;
       data[M.keys[2]] = f.email.value.trim();
       data[M.keys[3]] = f.message.value.trim();
+      data._replyto = f.email.value.trim();
       fetch('https://formsubmit.co/ajax/dariiarusanova@gmail.com', {
         method: 'POST',
         headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
         body: JSON.stringify(data)
       }).then(function(r){ return r.json(); }).then(function(d){
         if (d.success === 'true' || d.success === true) {
-          st.textContent = M.ok; f.reset(); touched = {}; counter.textContent = '0/499';
+          st.textContent = ''; f.reset(); touched = {}; counter.textContent = '0/499';
           ['name','phone','email','message'].forEach(function(n){ show(n); });
-        } else { throw new Error(d.message); }
-      }).catch(function(){ st.textContent = M.fail; })
+          f.hidden = true; sent.hidden = false; sent.querySelector('button').focus();
+        } else { throw new Error(d.message || ''); }
+      }).catch(function(err){
+        st.className = 'error';
+        st.textContent = /activat/i.test(err && err.message) ? M.activate : M.fail;
+      })
         .finally(function(){ update(); });
     });
 
