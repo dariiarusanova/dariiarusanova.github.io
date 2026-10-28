@@ -62,10 +62,6 @@
   .lang{font-weight:700;font-size:14px;border:1px solid var(--line);border-radius:999px;padding:7px 14px;color:var(--ink);margin-left:12px}
   .lang:hover{background:var(--surface-2);color:var(--ink)}
   .nav-right{display:flex;align-items:center}
-  .nav-cta{display:inline-flex;align-items:center;background:var(--accent);color:var(--on-accent);font-weight:600;font-size:14px;padding:8px 16px;border-radius:999px;margin-left:12px;transition:background .2s}
-  .nav-cta:hover{background:var(--accent-hover);color:var(--on-accent)}
-  .menu .m-only{display:none}
-  @media (max-width:560px){.nav-cta{display:none}.menu .m-only{display:list-item}}
   .burger{display:none;background:none;border:0;font-size:24px;cursor:pointer;color:var(--ink);padding:6px}
   @media (max-width:900px){
     .burger{display:block}
@@ -224,13 +220,14 @@
     <div class="nav-right">
     <button class="burger" aria-label="Меню" onclick="document.querySelector('.menu').classList.toggle('open')">&#9776;</button>
     <ul class="menu" onclick="this.classList.remove('open')">
-      <li><a href="#profile">Обо мне</a></li>
-      <li><a href="#cases">Опыт</a></li>
+      <li><a href="#profile">Профиль</a></li>
+      <li><a href="#directions">Направления</a></li>
+      <li><a href="#cases">Кейсы</a></li>
       <li><a href="#skills">Навыки</a></li>
+      <li><a href="#projects">Проекты</a></li>
       <li><a href="#reviews">Отзывы</a></li>
-      <li class="m-only"><a href="#contacts">Связаться</a></li>
+      <li><a href="#contacts">Контакты</a></li>
     </ul>
-    <a class="nav-cta" href="#contacts">Связаться</a>
     <a class="lang" href="/en/" hreflang="en" lang="en">EN</a>
     </div>
   </div>
