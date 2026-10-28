@@ -17,7 +17,7 @@
     --bg:#FAF8F5; --surface:#FFFFFF; --surface-2:#F2EFEA; --line:#E7E2DA;
     --ink:#16181D; --muted:#5C626C;
     --accent:#0E7C76; --accent-hover:#0A635E; --accent-soft:#DCEFEC; --on-accent:#FFFFFF;
-    --star:#E3A21A;
+    --star:#E3A21A; --danger:#C2412D; --danger-soft:#F8E1DC;
     --radius:18px; --shadow:0 1px 2px rgba(22,24,29,.04),0 8px 24px rgba(22,24,29,.06);
   }
   @media (prefers-color-scheme: dark){
@@ -25,6 +25,7 @@
       --bg:#0F1215; --surface:#171B20; --surface-2:#1D2228; --line:#2A3038;
       --ink:#EDEFF2; --muted:#A0A8B2;
       --accent:#4FC3B7; --accent-hover:#6FD3C8; --accent-soft:#143532; --on-accent:#0F1215;
+      --danger:#FF8A73; --danger-soft:#3A1C17;
       --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
     }
   }
@@ -135,6 +136,15 @@
   form textarea{min-height:130px;resize:vertical}
   form .btn{justify-content:center}
   #form-status{min-height:1.2em;font-size:14px;color:var(--muted);margin:0}
+  .field{display:grid;gap:4px;min-width:0}
+  .err{color:var(--danger);font-size:13px;margin:0;line-height:1.4}
+  .err:empty{display:none}
+  form .invalid,form .invalid:focus{border-color:var(--danger);box-shadow:0 0 0 4px var(--danger-soft)}
+  .field-foot{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+  .counter{font-size:12px;color:var(--muted);margin-left:auto;white-space:nowrap}
+  .counter.limit{color:var(--danger)}
+  .req-note{font-size:13px;color:var(--muted);margin:0}
+  form .btn:disabled{opacity:.45;cursor:not-allowed;transform:none;background:var(--accent);border-color:var(--accent)}
 
   footer{padding:32px 0;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
   footer .container{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
@@ -295,15 +305,28 @@
           <a href="https://t.me/dariiarus" target="_blank" rel="noopener" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3 18.6 20c-.2 1.1-.9 1.4-1.8.9l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.2-8.3c.4-.4-.1-.6-.6-.2L6.1 13.6 1.2 12c-1.1-.3-1.1-1.1.2-1.6L20.5 3c.9-.3 1.7.2 1.4 1.3z"/></svg></a>
         </div>
       </div>
-      <form id="contact-form" class="card">
+      <form id="contact-form" class="card" novalidate>
         <div class="row">
-          <input type="text" name="name" placeholder="Name" required>
-          <input type="tel" name="phone" placeholder="Phone">
+          <div class="field">
+            <input type="text" name="name" placeholder="Name" maxlength="90" autocomplete="name" aria-describedby="err-name">
+            <p class="err" id="err-name" aria-live="polite"></p>
+          </div>
+          <div class="field">
+            <input type="tel" name="phone" placeholder="Phone" maxlength="12" inputmode="tel" autocomplete="tel" aria-describedby="err-phone">
+            <p class="err" id="err-phone" aria-live="polite"></p>
+          </div>
         </div>
-        <input type="email" name="email" placeholder="Email">
-        <textarea name="message" placeholder="Message" required></textarea>
+        <div class="field">
+          <input type="email" name="email" placeholder="Email *" maxlength="254" autocomplete="email" required aria-required="true" aria-describedby="err-email">
+          <p class="err" id="err-email" aria-live="polite"></p>
+        </div>
+        <div class="field">
+          <textarea name="message" placeholder="Message *" maxlength="499" required aria-required="true" aria-describedby="err-message"></textarea>
+          <div class="field-foot"><p class="err" id="err-message" aria-live="polite"></p><span class="counter" id="msg-counter">0/499</span></div>
+        </div>
         <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
-        <button class="btn" type="submit">Send</button>
+        <p class="req-note">* - required fields</p>
+        <button class="btn" type="submit" disabled>Send</button>
         <p id="form-status" role="status"></p>
       </form>
     </div>
@@ -329,27 +352,135 @@
     document.getElementById('year').textContent = now.getFullYear();
   })();
 
-  // Form is sent via FormSubmit to email
-  document.getElementById('contact-form').addEventListener('submit', function(e){
-    e.preventDefault();
-    var f = e.target, st = document.getElementById('form-status'), b = f.querySelector('button');
-    if (f._honey.value) return;
-    b.disabled = true; st.textContent = 'Sending...';
-    fetch('https://formsubmit.co/ajax/dariiarusanova@gmail.com', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
-      body: JSON.stringify({
-        _subject: 'Message from website (EN)',
-        _template: 'table',
-        'Name': f.name.value, 'Phone': f.phone.value, 'Email': f.email.value, 'Message': f.message.value
-      })
-    }).then(function(r){ return r.json(); }).then(function(d){
-      if (d.success === 'true' || d.success === true) { st.textContent = 'Thank you! Your message has been sent.'; f.reset(); }
-      else { throw new Error(d.message); }
-    }).catch(function(){
-      st.textContent = 'Could not send the message. Please email dariiarusanova@gmail.com';
-    }).finally(function(){ b.disabled = false; });
-  });
+  // Form: validation + sending via FormSubmit (email)
+  (function(){
+    var M = {
+      ru: {
+        required: 'Обязательное поле',
+        name: 'Только буквы (кириллица, латиница), пробел и дефис',
+        phone: 'Введите номер полностью: + и 11 цифр',
+        email: 'Введите корректный email, например name@mail.ru',
+        sql: 'Похоже на SQL-код - такое сообщение отправить нельзя',
+        sending: 'Отправляем...',
+        ok: 'Thank you! Your message has been sent.',
+        fail: 'Could not send the message. Please email dariiarusanova@gmail.com',
+        subject: 'Сообщение с сайта',
+        keys: ['Имя', 'Телефон', 'Email', 'Сообщение']
+      },
+      en: {
+        required: 'This field is required',
+        name: 'Letters only (Cyrillic, Latin), spaces and hyphens',
+        phone: 'Enter the full number: + and 11 digits',
+        email: 'Enter a valid email, e.g. name@mail.com',
+        sql: 'This looks like SQL code - the message cannot be sent',
+        sending: 'Sending...',
+        ok: 'Thank you! Your message has been sent.',
+        fail: 'Could not send the message. Please email dariiarusanova@gmail.com',
+        subject: 'Message from website (EN)',
+        keys: ['Name', 'Phone', 'Email', 'Message']
+      }
+    }[document.documentElement.lang] ;
+
+    var f = document.getElementById('contact-form');
+    var btn = f.querySelector('button[type=submit]');
+    var st = document.getElementById('form-status');
+    var counter = document.getElementById('msg-counter');
+    var touched = {};
+    var nameStripped = false;
+
+    var NAME_BAD = /[^A-Za-zА-Яа-яЁё \-]/g;
+    var EMAIL_OK = /^[^\s@]+@[^\s@.]+(\.[^\s@.]+)*\.[A-Za-zА-Яа-я]{2,}$/;
+    var SQL = [
+      /\bselect\b[\s\S]{0,200}\bfrom\b/i,
+      /\binsert\s+into\b/i,
+      /\bupdate\b[\s\S]{0,100}\bset\b[\s\S]{0,100}=/i,
+      /\bdelete\s+from\b/i,
+      /\b(drop|truncate|alter)\s+(table|database|schema|view|index|user)\b/i,
+      /\bcreate\s+(table|database|schema|view|index|procedure|function|trigger|user)\b/i,
+      /\bunion(\s+all)?\s+select\b/i,
+      /\b(exec|execute)\s*(\(|xp_|sp_)/i,
+      /\b(information_schema|sysobjects|pg_sleep|waitfor\s+delay)\b/i,
+      /\b(sleep|benchmark)\s*\(/i,
+      /['"`]\s*(or|and)\s+['"`]?\w+['"`]?\s*=\s*['"`]?\w+/i,
+      /;\s*--|'\s*--|\/\*[\s\S]*?\*\//
+    ];
+    function isSql(v){ return SQL.some(function(r){ return r.test(v); }); }
+
+    function check(name){
+      var v = f[name].value;
+      switch(name){
+        case 'name':  return nameStripped ? M.name : '';
+        case 'phone': var d = v.replace(/\D/g,''); return d.length && d.length < 11 ? M.phone : '';
+        case 'email': v = v.trim(); return !v ? M.required : (EMAIL_OK.test(v) ? '' : M.email);
+        case 'message': return !v.trim() ? M.required : (isSql(v) ? M.sql : '');
+      }
+    }
+    function show(name, force){
+      var msg = check(name);
+      var visible = msg && (touched[name] || force || msg === M.sql || msg === M.name);
+      f[name].classList.toggle('invalid', !!visible);
+      f[name].setAttribute('aria-invalid', visible ? 'true' : 'false');
+      document.getElementById('err-' + name).textContent = visible ? msg : '';
+      return !msg;
+    }
+    function update(){
+      var ok = ['name','phone','email','message'].map(function(n){ return !check(n); }).every(Boolean);
+      btn.disabled = !ok;
+    }
+
+    f.name.addEventListener('input', function(){
+      var v = f.name.value, clean = v.replace(NAME_BAD, '').slice(0, 90);
+      nameStripped = clean !== v;
+      if (nameStripped) f.name.value = clean;
+      show('name'); update();
+    });
+    f.name.addEventListener('blur', function(){ nameStripped = false; show('name'); });
+
+    f.phone.addEventListener('input', function(){
+      var d = f.phone.value.replace(/\D/g,'').slice(0, 11);
+      f.phone.value = d ? '+' + d : '';
+      show('phone'); update();
+    });
+    f.phone.addEventListener('focus', function(){ if (!f.phone.value) f.phone.value = '+'; });
+    f.phone.addEventListener('blur', function(){ if (f.phone.value === '+') f.phone.value = ''; touched.phone = true; show('phone'); update(); });
+
+    f.email.addEventListener('input', function(){ show('email'); update(); });
+    f.email.addEventListener('blur', function(){ touched.email = true; show('email'); });
+
+    f.message.addEventListener('input', function(){
+      var n = f.message.value.length;
+      counter.textContent = n + '/499';
+      counter.classList.toggle('limit', n >= 499);
+      show('message'); update();
+    });
+    f.message.addEventListener('blur', function(){ touched.message = true; show('message'); });
+
+    f.addEventListener('submit', function(e){
+      e.preventDefault();
+      if (f._honey.value) return;
+      var ok = ['name','phone','email','message'].map(function(n){ return show(n, true); }).every(Boolean);
+      if (!ok) { update(); return; }
+      btn.disabled = true; st.textContent = M.sending;
+      var data = { _subject: M.subject, _template: 'table' };
+      data[M.keys[0]] = f.name.value.trim();
+      data[M.keys[1]] = f.phone.value;
+      data[M.keys[2]] = f.email.value.trim();
+      data[M.keys[3]] = f.message.value.trim();
+      fetch('https://formsubmit.co/ajax/dariiarusanova@gmail.com', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+        body: JSON.stringify(data)
+      }).then(function(r){ return r.json(); }).then(function(d){
+        if (d.success === 'true' || d.success === true) {
+          st.textContent = M.ok; f.reset(); touched = {}; counter.textContent = '0/499';
+          ['name','phone','email','message'].forEach(function(n){ show(n); });
+        } else { throw new Error(d.message); }
+      }).catch(function(){ st.textContent = M.fail; })
+        .finally(function(){ update(); });
+    });
+
+    update();
+  })();
 </script>
 </body>
 </html>
