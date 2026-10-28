@@ -105,9 +105,19 @@
   h3{font-size:18px;margin:0 0 8px;font-weight:700;letter-spacing:-.01em}
   .muted{color:var(--muted);font-size:15px;margin:0}
   .grid{display:grid;gap:16px}
-  .g2{grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))}
+  .g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+  @media (max-width:720px){.g2{grid-template-columns:1fr}}
   .g3{grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))}
-  .g4{grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
+  .g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+  @media (max-width:1060px){.g4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media (max-width:560px){.g4{grid-template-columns:1fr}}
+  .skills{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+  @media (max-width:1060px){.skills{grid-template-columns:repeat(3,minmax(0,1fr))}}
+  @media (max-width:820px){.skills{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media (max-width:520px){.skills{grid-template-columns:1fr}}
+  .skills .card{padding:20px}
+  .skills h3{font-size:16px;display:flex;align-items:baseline;gap:10px;margin-bottom:6px}
+  .skills .muted{font-size:14px;line-height:1.5}
   .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px;transition:transform .2s,box-shadow .2s}
   .card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
   .form-card:hover{transform:none}
@@ -116,7 +126,7 @@
 
   .profile-text{font-size:clamp(18px,2.2vw,22px);line-height:1.55;max-width:860px;margin:0}
 
-  .skill .num{display:inline-block;font-size:13px;font-weight:700;color:var(--accent);background:var(--accent-soft);border-radius:8px;padding:2px 9px;margin-bottom:14px}
+  .skill .num{flex:none;font-size:12px;font-weight:700;color:var(--accent);background:var(--accent-soft);border-radius:7px;padding:1px 7px}
 
   .project{display:flex;flex-direction:column}
   .project .role{font-size:13px;font-weight:600;color:var(--accent);margin-bottom:6px}
@@ -272,19 +282,19 @@
 <section id="skills">
   <div class="container">
     <div class="sec-head"><h2>Skills</h2></div>
-    <div class="grid g3">
-      <div class="card skill"><span class="num">01</span><h3>Travel-tech domain</h3><p class="muted">Tour operator platform: search, booking, orders, chats, authorization, agency CRM. B2C and B2B.</p></div>
-      <div class="card skill"><span class="num">02</span><h3>Testing techniques</h3><p class="muted">Pairwise testing, decision tables, testing with many variable parameters.</p></div>
-      <div class="card skill"><span class="num">03</span><h3>Test management</h3><p class="muted">Checklists and test cases in Qase, TestRail, Excel and other tools.</p></div>
-      <div class="card skill"><span class="num">04</span><h3>Product documentation</h3><p class="muted">Documentation for large and small projects: structure, navigation, API and notification tables, built-in checklists.</p></div>
-      <div class="card skill"><span class="num">05</span><h3>API testing</h3><p class="muted">Checking client-to-server requests and responses; a map of API methods by screen and component.</p></div>
-      <div class="card skill"><span class="num">06</span><h3>Writing specifications</h3><p class="muted">Requirements for new features, refinement with developers, documentation and acceptance testing.</p></div>
-      <div class="card skill"><span class="num">07</span><h3>QA process standards</h3><p class="muted">Rules for tasks and bug reports, linking tasks to documentation.</p></div>
-      <div class="card skill"><span class="num">08</span><h3>Test coordination</h3><p class="muted">Moving tasks through the QA team, statuses, tester workload dashboards.</p></div>
-      <div class="card skill"><span class="num">09</span><h3>Google Analytics</h3><p class="muted">Verifying event tracking setup.</p></div>
-      <div class="card skill"><span class="num">10</span><h3>CRM testing</h3><p class="muted">Functionality, performance, security and usability of CRM systems.</p></div>
-      <div class="card skill"><span class="num">11</span><h3>AI-assisted QA</h3><p class="muted">Generating checklists, documentation audits, comment triage, preparing tasks according to team rules.</p></div>
-      <div class="card skill"><span class="num">12</span><h3>Tools</h3><p class="muted">ClickUp, Jira, Qase, TestRail, Google Sheets, Postman, DevTools, Claude. Website builders: WordPress, Site123, Tilda.</p></div>
+    <div class="grid skills">
+      <div class="card skill"><h3><span class="num">01</span>Домен travel-tech</h3><p class="muted">Платформа туроператора: поиск, бронирование, заявки, чаты, авторизация, CRM агентств. B2C и B2B.</p></div>
+      <div class="card skill"><h3><span class="num">02</span>Техники тестирования</h3><p class="muted">Попарное тестирование, таблицы решений, тестирование множества переменных параметров.</p></div>
+      <div class="card skill"><h3><span class="num">03</span>Тест-менеджмент</h3><p class="muted">Чек-листы и тест-кейсы в Qase, TestRail, Excel и других системах.</p></div>
+      <div class="card skill"><h3><span class="num">04</span>Продуктовая документация</h3><p class="muted">Документация для крупного и небольших проектов: структура, навигация, таблицы API и уведомлений, встроенные чек-листы.</p></div>
+      <div class="card skill"><h3><span class="num">05</span>API-тестирование</h3><p class="muted">Проверка запросов от клиента к серверу и ответов; карта API-методов по экранам и компонентам.</p></div>
+      <div class="card skill"><h3><span class="num">06</span>Написание ТЗ</h3><p class="muted">Требования к новому функционалу, доработка с разработчиком, документация и приёмочное тестирование.</p></div>
+      <div class="card skill"><h3><span class="num">07</span>Стандарты QA-процесса</h3><p class="muted">Правила оформления задач и баг-репортов, связь задач с документацией.</p></div>
+      <div class="card skill"><h3><span class="num">08</span>Координация тестирования</h3><p class="muted">Движение задач через команду QA, статусы, дашборды загрузки тестировщиков.</p></div>
+      <div class="card skill"><h3><span class="num">09</span>Google Analytics</h3><p class="muted">Проверка настройки событий.</p></div>
+      <div class="card skill"><h3><span class="num">10</span>CRM-тестирование</h3><p class="muted">Функциональность, производительность, безопасность и удобство CRM.</p></div>
+      <div class="card skill"><h3><span class="num">11</span>QA с помощью AI</h3><p class="muted">Генерация чек-листов, аудит документации, разбор комментариев, подготовка задач по правилам команды.</p></div>
+      <div class="card skill"><h3><span class="num">12</span>Инструменты</h3><p class="muted">ClickUp, Jira, Qase, TestRail, Google Sheets, Postman, DevTools, Claude. Конструкторы сайтов: WordPress, Site123, Tilda.</p></div>
     </div>
   </div>
 </section>
@@ -292,7 +302,7 @@
 <section id="projects" class="alt">
   <div class="container">
     <div class="sec-head"><h2>Projects</h2></div>
-    <div class="grid g2">
+    <div class="grid g4">
       <div class="card project"><div class="role">QA Lead</div><h3>Anex Tour</h3><p class="muted">Travel-tech. Websites and services for B2C and B2B. Leading the testing team, QA processes, documentation (international project).<br>https://anextour.ru/</p><a class="link" href="https://www.anextour.com/" target="_blank" rel="noopener">anextour.com →</a></div>
       <div class="card project"><div class="role">QA / Project setup</div><h3>Tactic</h3><p class="muted">Entertainment and e-commerce. Online quizzes, offline game landing pages, online store. Building the process: task management, specifications, testing, documentation (Russia).</p><a class="link" href="https://tactic.team/" target="_blank" rel="noopener">tactic.team →</a></div>
       <div class="card project"><div class="role">QA / Project setup</div><h3>Hunrizon</h3><p class="muted">Legal-tech. Legal services website. Building the process: task management, specifications, testing, documentation (Hungary).</p><a class="link" href="https://www.hunrizon.com/" target="_blank" rel="noopener">hunrizon.com →</a></div>
