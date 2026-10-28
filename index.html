@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Дария Русанова - QA Lead в travel‑tech</title>
+<meta name="description" content="Тестирование, документация и QA-процессы для B2C и B2B продуктов">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --accent:#167477; --accent-dark:#0f5a5c; --logo:#7cc4bf;
+    --bg-light:#f9fafa; --bg-alt:#eaf0f0; --text:#222; --muted:#555;
+    --card:#fff; --shadow:0 4px 18px rgba(0,0,0,.06);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:Manrope,Arial,sans-serif;color:var(--text);background:var(--bg-light);line-height:1.55}
+  a{color:var(--accent)}
+  img{max-width:100%;display:block}
+  .container{max-width:1110px;margin:0 auto;padding:0 16px}
+
+  /* Header */
+  header{position:sticky;top:0;z-index:10;background:#fff;box-shadow:0 1px 8px rgba(0,0,0,.08)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .logo img{height:44px;width:auto}
+  .menu{display:flex;gap:28px;list-style:none;margin:0;padding:0}
+  .menu a{color:#222;text-decoration:none;font-weight:500;font-size:15px;padding:6px 0;border-bottom:2px solid transparent}
+  .menu a:hover{border-color:var(--accent)}
+  .burger{display:none;background:none;border:0;font-size:26px;cursor:pointer;color:#222}
+  @media (max-width:860px){
+    .burger{display:block}
+    .menu{display:none;position:absolute;top:72px;left:0;right:0;background:#fff;flex-direction:column;gap:0;padding:8px 16px 16px;box-shadow:0 8px 12px rgba(0,0,0,.08)}
+    .menu.open{display:flex}
+    .menu a{display:block;padding:10px 0}
+  }
+
+  /* Hero */
+  .hero{min-height:calc(100vh - 72px);display:flex;align-items:center;color:#111;
+    background:linear-gradient(90deg,rgba(255,255,255,.85) 0%,rgba(255,255,255,.55) 40%,rgba(255,255,255,0) 65%),
+      url("https://files.cdn-files-a.com/uploads/10575377/2000_67f2c64a7c93a_filter_67f2c6916b37b.jpg") center right/cover no-repeat}
+  .hero h1{font-size:clamp(34px,5vw,52px);line-height:1.25;margin:0 0 24px;font-weight:600;max-width:520px}
+  .hero .line{width:100px;height:4px;background:var(--accent);margin-bottom:28px}
+  .hero p{font-size:18px;max-width:460px;margin:0 0 34px}
+  .btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;text-transform:uppercase;font-size:14px;letter-spacing:.5px;padding:15px 32px;border:0;border-radius:2px;cursor:pointer;font-family:inherit}
+  .btn:hover{background:var(--accent-dark)}
+  .btns{display:flex;gap:16px;flex-wrap:wrap}
+
+  /* Sections */
+  section{padding:80px 0;scroll-margin-top:72px}
+  section:nth-of-type(odd){background:var(--bg-light)}
+  section:nth-of-type(even){background:var(--bg-alt)}
+  h2{text-align:center;text-transform:uppercase;font-weight:400;font-size:32px;margin:0 0 14px}
+  h2::after{content:"";display:block;width:50px;height:2px;background:var(--accent);margin:18px auto 50px}
+  h3{font-size:19px;margin:0 0 12px;font-weight:600}
+  .grid{display:grid;gap:30px}
+  .g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  .g4{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+  .muted{color:var(--muted);font-size:15px}
+
+  .profile-lead{font-weight:600;margin-bottom:12px}
+  .card{background:var(--card);padding:34px 28px;border-radius:4px;box-shadow:var(--shadow)}
+  .card svg{width:44px;height:44px;color:var(--accent);margin-bottom:20px}
+
+  .skill{position:relative;padding-top:10px}
+  .skill .num{position:absolute;top:-34px;left:50%;transform:translateX(-50%);font-size:110px;font-weight:300;color:rgba(0,0,0,.06);line-height:1;pointer-events:none}
+  .skill h3{position:relative}
+
+  .project a{text-decoration:none;font-weight:500}
+  .project .url{word-break:break-all}
+
+  .review .stars{color:#f5b301;letter-spacing:3px;margin-bottom:10px}
+  .review .role{font-style:italic;font-size:12px;color:var(--muted);margin:-6px 0 16px}
+
+  .contacts{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+  @media (max-width:760px){.contacts{grid-template-columns:1fr}}
+  .contact-info{text-align:center}
+  .contact-info p{margin:4px 0}
+  .socials{display:flex;justify-content:center;gap:22px;margin-top:28px}
+  .socials svg{width:30px;height:30px;color:var(--accent)}
+  form input,form textarea{width:100%;padding:13px 14px;margin-bottom:14px;border:1px solid #d5dcdc;border-radius:2px;font:inherit;font-size:14px;background:#fff}
+  form textarea{min-height:90px;resize:vertical}
+  form .btn{width:100%}
+
+  footer{background:#fff;text-align:center;padding:28px 16px;font-size:14px;color:var(--muted)}
+  footer strong{display:block;color:var(--text);font-weight:600;margin-bottom:4px}
+</style>
+</head>
+<body id="page-top">
+
+<header>
+  <div class="container nav">
+    <a class="logo" href="#page-top"><img src="https://files.cdn-files-a.com/uploads/10575377/400_6ae11fb68e819.png" alt="Дария Русанова"></a>
+    <button class="burger" aria-label="Меню" onclick="document.querySelector('.menu').classList.toggle('open')">&#9776;</button>
+    <ul class="menu" onclick="this.classList.remove('open')">
+      <li><a href="#profile">Профиль</a></li>
+      <li><a href="#directions">Направления</a></li>
+      <li><a href="#cases">Кейсы</a></li>
+      <li><a href="#skills">Навыки</a></li>
+      <li><a href="#projects">Проекты</a></li>
+      <li><a href="#reviews">Отзывы</a></li>
+      <li><a href="#contacts">Контакты</a></li>
+    </ul>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="container">
+    <h1>QA Lead в travel‑tech</h1>
+    <div class="line"></div>
+    <p>Тестирование, документация и QA-процессы для B2C и B2B продуктов</p>
+    <div class="btns">
+      <a class="btn" href="https://t.me/dariiarus" target="_blank" rel="noopener">Telegram</a>
+      <a class="btn" href="mailto:dariiarusanova@gmail.com">Email</a>
+    </div>
+  </div>
+</div>
+
+<section id="profile">
+  <div class="container">
+    <h2>Профиль</h2>
+    <p class="profile-lead"><span id="years">6 лет</span> в QA · 25+ сайтов сети · B2C и B2B</p>
+    <p>Опыт в QA - с 2020 года. Тестирование ключевых сценариев продаж, продуктовая документация и выстраивание QA-процессов в B2C и B2B продуктах. Интерес к аналитике и UI-тестированию.</p>
+  </div>
+</section>
+
+<section id="directions">
+  <div class="container">
+    <h2>Направления</h2>
+    <div class="grid g4">
+      <div><h3>Ручное тестирование</h3><p class="muted">Детальная проверка функциональности до релиза: дефекты находятся раньше пользователей.</p></div>
+      <div><h3>Чек‑листы и тест‑кейсы</h3><p class="muted">Покрытие требований и пользовательских сценариев, отслеживание изменений между тестом и ретестом.</p></div>
+      <div><h3>Техническая документация</h3><p class="muted">Создание и поддержка документации с учётом специфики продукта.</p></div>
+      <div><h3>QA-процессы</h3><p class="muted">Стандарты задач и баг-репортов, координация команды тестирования.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="cases">
+  <div class="container">
+    <h2>Кейсы</h2>
+    <div class="grid g2">
+      <div class="card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/><rect x="7" y="4" width="3" height="4" fill="currentColor"/><rect x="14" y="10" width="3" height="4" fill="currentColor"/><rect x="9" y="16" width="3" height="4" fill="currentColor"/></svg>
+        <h3>Создание внутреннего сервиса настроек сайтов сети</h3>
+        <p class="muted">Полный цикл: формирование запроса, ТЗ, тестирование, документирование проекта. Единый источник настроек 25+ сайтов сети для продуктов, разработчиков и QA: проверка изменений перед релизом и подготовка запуска нового рынка - 6 режимов работы.</p>
+      </div>
+      <div class="card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h3l2.5 12h12l2-8H6.5"/><circle cx="9" cy="20" r="1.6" fill="currentColor"/><circle cx="18" cy="20" r="1.6" fill="currentColor"/></svg>
+        <h3>Полный цикл QA и документации в крупном travel-tech проекте</h3>
+        <p class="muted">QA критичных для выручки сценариев для B2C и B2B - от авторизации и поиска до оформленной заявки и её сопровождения в чате. Документация, охватывающая проект целиком.</p>
+      </div>
+      <div class="card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="7" width="16" height="12" rx="3"/><path d="M12 7V3M9 13h.01M15 13h.01M9 16h6"/></svg>
+        <h3>QA с помощью AI</h3>
+        <p class="muted">Чек-листы из задач, аудит документации, разбор комментариев и трекинг задач команды в связке с Claude.</p>
+      </div>
+      <div class="card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9l2 2 3-3M7 15l2 2 3-3M14 10h4M14 16h4"/></svg>
+        <h3>QA / Project setup небольших проектов</h3>
+        <p class="muted">Выстраивание процесса: таск-менеджмент проекта, ТЗ для фронтенда и бэкенда, приоритизация задач и тестирование.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container">
+    <h2>Навыки</h2>
+    <div class="grid g3" style="row-gap:60px">
+      <div class="skill"><span class="num">1</span><h3>Домен travel-tech</h3><p class="muted">Платформа туроператора: поиск, бронирование, заявки, чаты, авторизация, CRM агентств. B2C и B2B.</p></div>
+      <div class="skill"><span class="num">2</span><h3>Техники тестирования</h3><p class="muted">Попарное тестирование, таблицы решений, тестирование множества переменных параметров.</p></div>
+      <div class="skill"><span class="num">3</span><h3>Тест-менеджмент</h3><p class="muted">Чек-листы и тест-кейсы в Qase, TestRail, Excel и других системах.</p></div>
+      <div class="skill"><span class="num">4</span><h3>Продуктовая документация</h3><p class="muted">Документация для крупного и небольших проектов: структура, навигация, таблицы API и уведомлений, встроенные чек-листы.</p></div>
+      <div class="skill"><span class="num">5</span><h3>API-тестирование</h3><p class="muted">Проверка запросов от клиента к серверу и ответов; карта API-методов по экранам и компонентам.</p></div>
+      <div class="skill"><span class="num">6</span><h3>Написание ТЗ</h3><p class="muted">Требования к новому функционалу, доработка с разработчиком, документация и приёмочное тестирование.</p></div>
+      <div class="skill"><span class="num">7</span><h3>Стандарты QA-процесса</h3><p class="muted">Правила оформления задач и баг-репортов, связь задач с документацией.</p></div>
+      <div class="skill"><span class="num">8</span><h3>Координация тестирования</h3><p class="muted">Движение задач через команду QA, статусы, дашборды загрузки тестировщиков.</p></div>
+      <div class="skill"><span class="num">9</span><h3>Google Analytics</h3><p class="muted">Проверка настройки событий.</p></div>
+      <div class="skill"><span class="num">10</span><h3>CRM-тестирование</h3><p class="muted">Функциональность, производительность, безопасность и удобство CRM.</p></div>
+      <div class="skill"><span class="num">11</span><h3>QA с помощью AI</h3><p class="muted">Генерация чек-листов, аудит документации, разбор комментариев, подготовка задач по правилам команды.</p></div>
+      <div class="skill"><span class="num">12</span><h3>Инструменты</h3><p class="muted">ClickUp, Jira, Qase, TestRail, Google Sheets, Postman, DevTools, Claude. Конструкторы сайтов: WordPress, Site123, Tilda.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container">
+    <h2>Проекты</h2>
+    <div class="grid g2" style="max-width:860px;margin:0 auto">
+      <div class="project"><h3>Anex Tour - QA Lead</h3><p class="muted">Travel-tech. Сайты и сервисы для B2C и B2B. Руководство командой тестирования, QA-процессы, документация (Международный проект).<br><span class="url">https://anextour.ru/</span></p><a href="https://www.anextour.com/" target="_blank" rel="noopener">anextour.com ›</a></div>
+      <div class="project"><h3>Tactic - QA / Project setup</h3><p class="muted">Entertainment и e-commerce. Онлайн-квизы, лендинги офлайн-игр, интернет-магазин. Выстраивание процесса: таск-менеджмент, ТЗ, тестирование, документация (Россия).</p><a href="https://tactic.team/" target="_blank" rel="noopener">tactic.team ›</a></div>
+      <div class="project"><h3>Hunrizon - QA / Project setup</h3><p class="muted">Legal-tech. Сайт юридических услуг. Выстраивание процесса: таск-менеджмент, ТЗ, тестирование, документация (Венгрия).</p><a href="https://www.hunrizon.com/" target="_blank" rel="noopener">hunrizon.com ›</a></div>
+      <div class="project"><h3>Другие проекты - QA / Project setup</h3><p class="muted">Сайты на WordPress, Tilda, Site123, тестирование CRM. Таск-менеджмент, ТЗ, тестирование, документация.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div class="container">
+    <h2>Отзывы</h2>
+    <div class="grid g3">
+      <div class="card review"><div class="stars">★★★★★</div><h3>Марина В.</h3><p class="role">Руководитель отдела интернет-маркетинга</p><p class="muted">Дария как ищейка - чувствует, где может быть бага, имеет аналитический склад ума и высокую работоспособность. Допускает до пользователя только качественный продукт.</p><a href="https://www.anextour.com/" target="_blank" rel="noopener">https://www.anextour.com/</a></div>
+      <div class="card review"><div class="stars">★★★★★</div><h3>Сергей Г.</h3><p class="role">CEO</p><p class="muted">Дария - профессионал, способный структурировать большой объём информации, подключаясь на любом этапе разработки. Незаменимый сотрудник.</p><a href="https://tactic.team/" target="_blank" rel="noopener">https://tactic.team/</a></div>
+      <div class="card review"><div class="stars">★★★★★</div><h3>Ксения С.</h3><p class="role">Директор по партнёрствам</p><p class="muted">Впечатлена уровнем экспертизы и вовлечённостью Дарии. Результат стабильно превосходит ожидания, а её поддержка стала важной частью нашего успеха.</p><a href="https://hunrizon.com/" target="_blank" rel="noopener">https://hunrizon.com/</a></div>
+    </div>
+  </div>
+</section>
+
+<section id="contacts">
+  <div class="container">
+    <h2>Контакты</h2>
+    <div class="contacts">
+      <div class="contact-info">
+        <p>Москва, Россия</p>
+        <p><a href="tel:+79776495868">+7-977 649-58-68</a></p>
+        <p><a href="mailto:dariiarusanova@gmail.com">dariiarusanova@gmail.com</a></p>
+        <p>Пн-Вс 10:00-21:00 (GMT+3)</p>
+        <p style="margin-top:28px">Готовность к релокации</p>
+        <p>Предпочтительный язык общения - русский</p>
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/dariia-rusanova-qalead/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+          <a href="https://hh.ru/resume/497e3679ff0932173a0039ed1f4c5a73626f36" target="_blank" rel="noopener" aria-label="Резюме на hh.ru"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M5.5 17c.6-2 2-3 3.5-3s2.9 1 3.5 3M14 9h4M14 13h4"/></svg></a>
+          <a href="https://t.me/dariiarus" target="_blank" rel="noopener" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3 18.6 20c-.2 1.1-.9 1.4-1.8.9l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.2-8.3c.4-.4-.1-.6-.6-.2L6.1 13.6 1.2 12c-1.1-.3-1.1-1.1.2-1.6L20.5 3c.9-.3 1.7.2 1.4 1.3z"/></svg></a>
+        </div>
+      </div>
+      <form id="contact-form">
+        <input type="text" name="name" placeholder="Имя" required>
+        <input type="text" name="phone" placeholder="Телефон">
+        <input type="email" name="email" placeholder="Email">
+        <textarea name="message" placeholder="Сообщение" required></textarea>
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+        <button class="btn" type="submit">Отправить</button>
+        <p id="form-status" class="muted" role="status" style="margin:10px 0 0;text-align:center"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <strong>Дария Русанова</strong>
+  Авторские права © <span id="year">2026</span> Все права защищены
+</footer>
+
+<script>
+  // Опыт в QA - считается от июля 2020
+  (function(){
+    var start = new Date(2020, 6, 1); // 1 июля 2020
+    var now = new Date();
+    var y = now.getFullYear() - start.getFullYear();
+    if (now.getMonth() < start.getMonth()) y--;
+    var n10 = y % 10, n100 = y % 100;
+    var word = (n10 === 1 && n100 !== 11) ? 'год'
+             : (n10 >= 2 && n10 <= 4 && (n100 < 12 || n100 > 14)) ? 'года' : 'лет';
+    document.getElementById('years').textContent = y + ' ' + word;
+    document.getElementById('year').textContent = now.getFullYear();
+  })();
+
+  // Форма отправляется через FormSubmit - письмо приходит на почту
+  document.getElementById('contact-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    var f = e.target, st = document.getElementById('form-status'), b = f.querySelector('button');
+    if (f._honey.value) return;
+    b.disabled = true; st.textContent = 'Отправляем...';
+    fetch('https://formsubmit.co/ajax/dariiarusanova@gmail.com', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+      body: JSON.stringify({
+        _subject: 'Сообщение с сайта',
+        _template: 'table',
+        'Имя': f.name.value, 'Телефон': f.phone.value, 'Email': f.email.value, 'Сообщение': f.message.value
+      })
+    }).then(function(r){ return r.json(); }).then(function(d){
+      if (d.success === 'true' || d.success === true) { st.textContent = 'Спасибо! Сообщение отправлено.'; f.reset(); }
+      else { throw new Error(d.message); }
+    }).catch(function(){
+      st.textContent = 'Не удалось отправить. Напишите, пожалуйста, на dariiarusanova@gmail.com';
+    }).finally(function(){ b.disabled = false; });
+  });
+</script>
+</body>
+</html>
