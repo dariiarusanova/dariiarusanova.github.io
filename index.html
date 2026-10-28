@@ -7,6 +7,8 @@
 <meta name="description" content="Тестирование, документация и QA-процессы для B2C и B2B продуктов">
 <meta name="theme-color" content="#FAF8F5" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0F1215" media="(prefers-color-scheme: dark)">
+<link rel="alternate" hreflang="ru" href="https://dariiarusanova.github.io/">
+<link rel="alternate" hreflang="en" href="https://dariiarusanova.github.io/en/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -42,6 +44,9 @@
   .menu{display:flex;gap:6px;list-style:none;margin:0;padding:0}
   .menu a{color:var(--ink);font-weight:500;font-size:15px;padding:8px 12px;border-radius:999px;transition:background .2s}
   .menu a:hover{background:var(--surface-2);color:var(--ink)}
+  .lang{font-weight:700;font-size:14px;border:1px solid var(--line);border-radius:999px;padding:7px 14px;color:var(--ink);margin-left:12px}
+  .lang:hover{background:var(--surface-2);color:var(--ink)}
+  .nav-right{display:flex;align-items:center}
   .burger{display:none;background:none;border:0;font-size:24px;cursor:pointer;color:var(--ink);padding:6px}
   @media (max-width:900px){
     .burger{display:block}
@@ -143,6 +148,7 @@
 <header>
   <div class="container nav">
     <a class="logo" href="#page-top"><img src="https://files.cdn-files-a.com/uploads/10575377/400_6ae11fb68e819.png" alt="Дария Русанова"></a>
+    <div class="nav-right">
     <button class="burger" aria-label="Меню" onclick="document.querySelector('.menu').classList.toggle('open')">&#9776;</button>
     <ul class="menu" onclick="this.classList.remove('open')">
       <li><a href="#profile">Профиль</a></li>
@@ -153,6 +159,8 @@
       <li><a href="#reviews">Отзывы</a></li>
       <li><a href="#contacts">Контакты</a></li>
     </ul>
+    <a class="lang" href="/en/" hreflang="en" lang="en">EN</a>
+    </div>
   </div>
 </header>
 
