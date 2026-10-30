@@ -214,6 +214,16 @@
   footer strong{color:var(--ink);font-weight:700}
 
   @media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto!important}}
+  @media (max-width:560px){
+    #projects .project{padding:18px 20px;cursor:pointer}
+    #projects .project h3{margin:0;display:flex;justify-content:space-between;align-items:center;gap:12px}
+    #projects .project h3::after{content:"";width:9px;height:9px;border-right:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(45deg);transition:transform .2s;flex:none;margin-top:-4px}
+    #projects .project.open h3::after{transform:rotate(-135deg);margin-top:4px}
+    #projects .project .muted,#projects .project .link{display:none}
+    #projects .project.open .muted{display:block;margin-top:10px}
+    #projects .project.open .link{display:inline-block}
+    #projects .grid{gap:10px}
+  }
 </style>
 </head>
 <body id="page-top">
@@ -349,10 +359,12 @@
 <section id="projects" class="alt">
   <div class="container">
     <div class="sec-head"><h2>Projects</h2></div>
-    <div class="grid g4">
-      <div class="card project"><div class="role">QA Lead</div><h3>Anex Tour</h3><p class="muted">Travel-tech. Websites and services for B2C and B2B. Leading the testing team, QA processes, documentation (international project).<br>https://anextour.ru/</p><a class="link" href="https://www.anextour.com/" target="_blank" rel="noopener">anextour.com →</a></div>
+    <div class="grid g3">
+      <div class="card project"><div class="role">QA Lead</div><h3>Anex Tour</h3><p class="muted">Travel. Websites and services for B2C and B2B. Leading the testing team, QA processes, documentation (international project).<br>https://anextour.ru/</p><a class="link" href="https://www.anextour.com/" target="_blank" rel="noopener">anextour.com →</a></div>
+      <div class="card project"><div class="role">QA / Project setup</div><h3>ZoomFilm</h3><p class="muted">Media. News portal about cinema and film industry professionals. Building the process: task management, specifications, testing, documentation (Russia).</p><a class="link" href="https://zoom.film/" target="_blank" rel="noopener">zoom.film →</a></div>
       <div class="card project"><div class="role">QA / Project setup</div><h3>Tactic</h3><p class="muted">Entertainment and e-commerce. Online quizzes, offline game landing pages, online store. Building the process: task management, specifications, testing, documentation (Russia).</p><a class="link" href="https://tactic.team/" target="_blank" rel="noopener">tactic.team →</a></div>
-      <div class="card project"><div class="role">QA / Project setup</div><h3>Hunrizon</h3><p class="muted">Legal-tech. Legal services website. Building the process: task management, specifications, testing, documentation (Hungary).</p><a class="link" href="https://www.hunrizon.com/" target="_blank" rel="noopener">hunrizon.com →</a></div>
+      <div class="card project"><div class="role">QA / Project setup</div><h3>Hunrizon</h3><p class="muted">Legal. Legal services website. Building the process: task management, specifications, testing, documentation (Hungary).</p><a class="link" href="https://www.hunrizon.com/" target="_blank" rel="noopener">hunrizon.com →</a></div>
+      <div class="card project"><div class="role">QA / Project setup</div><h3>Paylun</h3><p class="muted">Cleaning. Website of the largest cleaning company in Armenia. Building the process: task management, specifications, testing, documentation (Armenia).</p><a class="link" href="https://paylun.am/" target="_blank" rel="noopener">paylun.am →</a></div>
       <div class="card project"><div class="role">QA / Project setup</div><h3>Other projects</h3><p class="muted">Websites on WordPress, Tilda, Site123, CRM testing. Task management, specifications, testing, documentation.</p></div>
     </div>
   </div>
@@ -652,6 +664,9 @@
     addEventListener('scroll', function(){ if (!ticking) { ticking = true; requestAnimationFrame(spy); } }, {passive:true});
     spy();
   })();
+  (function(){ if(!matchMedia('(max-width:560px)').matches) return;
+    document.querySelectorAll('#projects .project').forEach(function(c,i){ if(i===0) c.classList.add('open');
+      c.addEventListener('click',function(e){ if(e.target.closest('a')) return; c.classList.toggle('open'); }); }); })();
 </script>
 </body>
 </html>
