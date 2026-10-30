@@ -214,6 +214,16 @@
   footer strong{color:var(--ink);font-weight:700}
 
   @media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto!important}}
+  @media (max-width:560px){
+    #projects .project{padding:18px 20px;cursor:pointer}
+    #projects .project h3{margin:0;display:flex;justify-content:space-between;align-items:center;gap:12px}
+    #projects .project h3::after{content:"";width:9px;height:9px;border-right:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(45deg);transition:transform .2s;flex:none;margin-top:-4px}
+    #projects .project.open h3::after{transform:rotate(-135deg);margin-top:4px}
+    #projects .project .muted,#projects .project .link{display:none}
+    #projects .project.open .muted{display:block;margin-top:10px}
+    #projects .project.open .link{display:inline-block}
+    #projects .grid{gap:10px}
+  }
 </style>
 </head>
 <body id="page-top">
@@ -349,10 +359,12 @@
 <section id="projects" class="alt">
   <div class="container">
     <div class="sec-head"><h2>Проекты</h2></div>
-    <div class="grid g4">
-      <div class="card project"><div class="role">QA Lead</div><h3>Anex Tour</h3><p class="muted">Travel-tech. Сайты и сервисы для B2C и B2B. Руководство командой тестирования, QA-процессы, документация (Международный проект).<br>https://anextour.ru/</p><a class="link" href="https://www.anextour.com/" target="_blank" rel="noopener">anextour.com →</a></div>
-      <div class="card project"><div class="role">QA / Project setup</div><h3>Tactic</h3><p class="muted">Entertainment и e-commerce. Онлайн-квизы, лендинги офлайн-игр, интернет-магазин. Выстраивание процесса: таск-менеджмент, ТЗ, тестирование, документация (Россия).</p><a class="link" href="https://tactic.team/" target="_blank" rel="noopener">tactic.team →</a></div>
-      <div class="card project"><div class="role">QA / Project setup</div><h3>Hunrizon</h3><p class="muted">Legal-tech. Сайт юридических услуг. Выстраивание процесса: таск-менеджмент, ТЗ, тестирование, документация (Венгрия).</p><a class="link" href="https://www.hunrizon.com/" target="_blank" rel="noopener">hunrizon.com →</a></div>
+    <div class="grid g3">
+      <div class="card project"><div class="role">QA Lead</div><h3>Anex Tour</h3><p class="muted">Туризм. Сайты и сервисы для B2C и B2B. Руководство командой тестирования, QA-процессы, документация (Международный проект).<br>https://anextour.ru/</p><a class="link" href="https://www.anextour.com/" target="_blank" rel="noopener">anextour.com →</a></div>
+      <div class="card project"><div class="role">QA / Project setup</div><h3>ZoomFilm</h3><p class="muted">Медиа. Новостной портал о кино и специалистах киноиндустрии. Выстраивание процесса: таск-менеджмент, ТЗ, тестирование, документация (Россия).</p><a class="link" href="https://zoom.film/" target="_blank" rel="noopener">zoom.film →</a></div>
+      <div class="card project"><div class="role">QA / Project setup</div><h3>Tactic</h3><p class="muted">Развлечения и интернет-торговля. Онлайн-квизы, лендинги офлайн-игр, интернет-магазин. Выстраивание процесса: таск-менеджмент, ТЗ, тестирование, документация (Россия).</p><a class="link" href="https://tactic.team/" target="_blank" rel="noopener">tactic.team →</a></div>
+      <div class="card project"><div class="role">QA / Project setup</div><h3>Hunrizon</h3><p class="muted">Юриспруденция. Сайт юридических услуг. Выстраивание процесса: таск-менеджмент, ТЗ, тестирование, документация (Венгрия).</p><a class="link" href="https://www.hunrizon.com/" target="_blank" rel="noopener">hunrizon.com →</a></div>
+      <div class="card project"><div class="role">QA / Project setup</div><h3>Paylun</h3><p class="muted">Клининг. Сайт крупнейшей клининговой компании Армении. Выстраивание процесса: таск-менеджмент, ТЗ, тестирование, документация (Армения).</p><a class="link" href="https://paylun.am/" target="_blank" rel="noopener">paylun.am →</a></div>
       <div class="card project"><div class="role">QA / Project setup</div><h3>Другие проекты</h3><p class="muted">Сайты на WordPress, Tilda, Site123, тестирование CRM. Таск-менеджмент, ТЗ, тестирование, документация.</p></div>
     </div>
   </div>
@@ -655,6 +667,9 @@
     addEventListener('scroll', function(){ if (!ticking) { ticking = true; requestAnimationFrame(spy); } }, {passive:true});
     spy();
   })();
+  (function(){ if(!matchMedia('(max-width:560px)').matches) return;
+    document.querySelectorAll('#projects .project').forEach(function(c,i){ if(i===0) c.classList.add('open');
+      c.addEventListener('click',function(e){ if(e.target.closest('a')) return; c.classList.toggle('open'); }); }); })();
 </script>
 </body>
 </html>
