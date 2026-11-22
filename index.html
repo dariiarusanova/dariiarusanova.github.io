@@ -678,13 +678,20 @@
     document.querySelectorAll('#projects .project').forEach(function(c,i){ if(i===0) c.classList.add('open');
       c.addEventListener('click',function(e){ if(e.target.closest('a')) return; c.classList.toggle('open'); }); }); })();
 </script>
+<script>window.goatcounter={path:function(){ return location.pathname; }};</script>
 <script data-goatcounter="https://dariiarusanova.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script>
   (function(){ var b=document.getElementById('gc-views'); if(!b) return;
-    fetch('https://dariiarusanova.goatcounter.com/counter/TOTAL.json')
-      .then(function(r){ if(!r.ok) throw 0; return r.json(); })
-      .then(function(d){ b.querySelector('.gc-n').textContent=d.count; b.hidden=false; })
-      .catch(function(){});
+    var base='https://dariiarusanova.goatcounter.com/counter/';
+    var paths=['/','/en/','/?v=2','/?v=3','/?v=4','/en/?v=4'];
+    Promise.all(paths.map(function(p){
+      return fetch(base+encodeURIComponent(p)+'.json')
+        .then(function(r){ return r.ok ? r.json() : {count:0}; })
+        .catch(function(){ return {count:0}; });
+    })).then(function(list){
+      var n=list.reduce(function(s,d){ return s+(parseInt(String(d.count).replace(/\D/g,''),10)||0); },0);
+      b.querySelector('.gc-n').textContent=n; b.hidden=false;
+    });
     b.addEventListener('click',function(){ b.classList.toggle('is-open'); }); })();
 </script>
 </body>
