@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dariia Rusanova - QA Lead in travel‑tech</title>
+<meta name="description" content="Testing, documentation and QA processes for B2C and B2B products">
+<meta name="theme-color" content="#F3F4F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0E1716" media="(prefers-color-scheme: dark)">
+<link rel="alternate" hreflang="ru" href="https://dariiarusanova.github.io/">
+<link rel="alternate" hreflang="en" href="https://dariiarusanova.github.io/en/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Dariia Rusanova - QA Lead in travel‑tech">
+<meta property="og:description" content="Testing, documentation and QA processes for B2C and B2B products">
+<meta property="og:url" content="https://dariiarusanova.github.io/en/">
+<meta property="og:image" content="https://dariiarusanova.github.io/assets/og_en.jpg">
+<meta property="og:image:width" content="2400">
+<meta property="og:image:height" content="1254">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="/assets/avatar.png">
+<link rel="apple-touch-icon" href="/assets/avatar.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F3F4F1; --surface:#FFFFFF; --surface-2:#E8ECE7; --line:#D9DFD7;
+    --ink:#12201F; --muted:#4E5D5B;
+    --accent:#1F6F6B; --accent-hover:#185955; --accent-soft:#DAEAE7; --on-accent:#FFFFFF; --marker:#E8735A;
+    --star:#E3A21A; --danger:#C2412D; --danger-soft:#F8E1DC;
+    --radius:18px; --shadow:0 1px 2px rgba(22,24,29,.04),0 8px 24px rgba(22,24,29,.06);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0E1716; --surface:#152120; --surface-2:#192826; --line:#263634;
+      --ink:#ECEFEA; --muted:#9FB0AD;
+      --accent:#5DBFB6; --accent-hover:#7ACFC7; --accent-soft:#163432; --on-accent:#0E1716; --marker:#F08C74;
+      --danger:#FF8A73; --danger-soft:#3A1C17;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+    }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:Manrope,system-ui,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{color:var(--accent-hover)}
+  img{max-width:100%;display:block}
+  .container{max-width:1160px;margin:0 auto;padding:0 20px}
+  @media (max-width:480px){.container{padding:0 16px}}
+
+  /* Header */
+  header{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .logo{display:block;line-height:0}
+  .logo-mark{display:block;height:38px;aspect-ratio:498/71;background:var(--accent);-webkit-mask:url(/assets/logo.webp) center/contain no-repeat;mask:url(/assets/logo.webp) center/contain no-repeat}
+  @media (max-width:480px){.logo-mark{height:30px}}
+  .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .menu{display:flex;gap:2px;list-style:none;margin:0;padding:0}
+  .menu a{color:var(--ink);font-weight:500;font-size:15px;padding:8px 11px;white-space:nowrap;border-radius:999px;transition:background .2s}
+  .menu a:hover{background:var(--surface-2);color:var(--ink)}
+  .menu a.active{background:var(--accent-soft);color:var(--accent)}
+  .lang{font-weight:700;font-size:14px;border:1px solid var(--line);border-radius:999px;padding:7px 14px;color:var(--ink);margin-left:12px}
+  .lang:hover{background:var(--surface-2);color:var(--ink)}
+  .nav-right{display:flex;align-items:center}
+  .burger{display:none;background:none;border:0;font-size:24px;cursor:pointer;color:var(--ink);padding:6px}
+  @media (max-width:1240px){.menu a{font-size:14px;padding:8px 8px}.logo-mark{height:32px}.lang{margin-left:8px}}
+  @media (max-width:1040px){
+    .burger{display:block}
+    .menu{display:none;position:absolute;top:68px;left:0;right:0;background:var(--bg);flex-direction:column;padding:8px 16px 16px;border-bottom:1px solid var(--line)}
+    .menu.open{display:flex}
+    .menu a{display:block;padding:12px}
+  }
+
+  /* Hero */
+  .hero{padding:72px 0 88px}
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);padding:6px 14px;border-radius:999px;margin-bottom:22px}
+  .eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--marker)}
+  .hero h1{font-size:clamp(40px,6vw,72px);line-height:1.05;letter-spacing:-.03em;margin:0 0 22px;font-weight:800}
+  .hero h1 span{color:var(--accent)}
+  .hero p.lead{font-size:clamp(17px,2vw,20px);color:var(--muted);max-width:520px;margin:0 0 34px}
+  .btns{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--on-accent);font-weight:600;font-size:15px;padding:14px 26px;border-radius:999px;border:1px solid var(--accent);cursor:pointer;font-family:inherit;transition:transform .15s,background .2s}
+  .btn:hover{background:var(--accent-hover);border-color:var(--accent-hover);color:var(--on-accent);transform:translateY(-1px)}
+  .btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+  .btn.ghost:hover{background:var(--surface-2);color:var(--ink)}
+  .photo{position:relative;aspect-ratio:5/4;border-radius:28px;overflow:hidden;box-shadow:var(--shadow);background:var(--surface-2)}
+  .photo img{width:100%;height:100%;object-fit:cover;object-position:50% 50%}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:44px;max-width:560px}
+  .stat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+  .stat b{display:block;font-size:24px;font-weight:800;letter-spacing:-.02em}
+  .stat span{font-size:13px;color:var(--muted)}
+  @media (max-width:860px){
+    .hero{padding:40px 0 64px}
+    .hero-grid{grid-template-columns:1fr;gap:36px}
+    .photo{aspect-ratio:5/4;max-width:560px;order:-1}
+  }
+  @media (max-width:480px){.stat{padding:12px}.stat b{font-size:19px}}
+
+  /* Sections */
+  section{padding:88px 0;scroll-margin-top:8px}
+  @media (max-width:860px){section{padding:64px 0;scroll-margin-top:32px}}
+  section.alt{background:var(--surface-2)}
+  .sec-head{margin-bottom:40px;max-width:720px}
+  .sec-head .label{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+  h2{font-size:clamp(28px,3.6vw,40px);letter-spacing:-.02em;line-height:1.15;margin:0;font-weight:800}
+  h3{font-size:18px;margin:0 0 8px;font-weight:700;letter-spacing:-.01em}
+  .muted{color:var(--muted);font-size:15px;margin:0}
+  .grid{display:grid;gap:16px}
+  .g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+  @media (max-width:720px){.g2{grid-template-columns:1fr}}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))}
+  .g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+  @media (max-width:1060px){.g4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media (max-width:560px){.g4{grid-template-columns:1fr}}
+  .skills{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+  @media (max-width:1060px){.skills{grid-template-columns:repeat(3,minmax(0,1fr))}}
+  @media (max-width:820px){.skills{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media (max-width:520px){.skills{grid-template-columns:1fr}}
+  .skills .card{padding:20px}
+  .skills h3{font-size:16px;display:flex;align-items:baseline;gap:10px;margin-bottom:6px}
+  .skills .muted{font-size:14px;line-height:1.5}
+  .skills-wrap{display:grid;gap:16px}
+  .domain{display:flex;gap:18px;align-items:flex-start}
+  .bottom-row{grid-template-columns:minmax(0,1fr) minmax(0,1.6fr)}
+  @media (max-width:860px){.bottom-row{grid-template-columns:1fr}}
+  .domain .icon{margin:0;flex:none}
+  .group-title{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+  .group-title::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--marker)}
+  .sk+.sk{border-top:1px solid var(--line);padding-top:14px;margin-top:14px}
+  .sk h3{font-size:16px;margin-bottom:4px}
+  .sk .muted{font-size:14px;line-height:1.5}
+  .chips{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+  .chips li{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:var(--bg);font-size:14px;font-weight:600}
+  .ti{width:16px;height:16px;flex:none;background:var(--accent);-webkit-mask:var(--i) center/contain no-repeat;mask:var(--i) center/contain no-repeat}
+  .tools h3{margin:0}
+  .tools-sub{margin-top:18px}
+  .edu-chips{margin:0}
+  .edu-chips li{font-weight:500}
+  .langs-title{margin:24px 0 0}
+  .reveal{opacity:0}
+  .reveal.instant{animation:none!important}
+  .reveal.in{opacity:1;animation:rise .6s cubic-bezier(.2,.7,.2,1) backwards}
+  @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px;transition:transform .2s,box-shadow .2s}
+  .card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+  .form-card:hover{transform:none}
+  .icon{width:48px;height:48px;border-radius:14px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;margin-bottom:18px}
+  .icon svg{width:24px;height:24px}
+
+  .profile-text{font-size:clamp(18px,2.2vw,22px);line-height:1.55;max-width:860px;margin:0}
+
+  .skill .num{flex:none;font-size:12px;font-weight:700;color:var(--accent);background:var(--accent-soft);border-radius:7px;padding:1px 7px}
+
+  .project{display:flex;flex-direction:column}
+  .project .role{font-size:13px;font-weight:600;color:var(--accent);margin-bottom:6px}
+  .project .muted{flex:1}
+  .project .link{margin-top:18px;font-weight:600;font-size:15px}
+
+  .review{display:flex;flex-direction:column}
+  .review .stars{color:var(--star);letter-spacing:2px;margin-bottom:14px}
+  .review blockquote{margin:0 0 22px;font-size:16px;line-height:1.6;flex:1}
+  .review .who{display:flex;align-items:center;gap:12px;border-top:1px solid var(--line);padding-top:16px}
+  .avatar{width:40px;height:40px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-weight:700}
+  .review .who b{display:block;font-size:15px}
+  .review .who span{font-size:13px;color:var(--muted)}
+  .review .who a{font-size:13px}
+
+  .contacts{display:grid;grid-template-columns:1fr 1.1fr;gap:16px}
+  @media (max-width:860px){.contacts{grid-template-columns:1fr}}
+  .clist{list-style:none;margin:0 0 24px;padding:0;display:grid;gap:14px}
+  .clist li{display:flex;gap:12px;align-items:flex-start}
+  .clist svg{width:20px;height:20px;color:var(--accent);flex:none;margin-top:3px}
+  .notes{border-top:1px solid var(--line);padding-top:20px;color:var(--muted);font-size:15px}
+  .notes p{margin:0 0 4px}
+  .socials{display:flex;gap:10px;margin-top:24px}
+  .socials a{width:44px;height:44px;border-radius:12px;border:1px solid var(--line);display:grid;place-items:center;color:var(--ink);transition:background .2s}
+  .socials a:hover{background:var(--accent-soft);color:var(--accent)}
+  .socials svg{width:20px;height:20px}
+  form{display:grid;gap:12px}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media (max-width:520px){.row{grid-template-columns:1fr}}
+  form input,form textarea{width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:12px;font:inherit;font-size:15px;background:var(--bg);color:var(--ink);transition:border-color .2s,box-shadow .2s}
+  form input:focus,form textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+  form textarea{min-height:130px;resize:vertical}
+  form .btn{justify-content:center}
+  #form-status{min-height:1.2em;font-size:14px;color:var(--muted);margin:0}
+  .field{display:grid;gap:4px;min-width:0}
+  .err{color:var(--danger);font-size:13px;margin:0;line-height:1.4}
+  .err:empty{display:none}
+  form .invalid,form .invalid:focus{border-color:var(--danger);box-shadow:0 0 0 4px var(--danger-soft)}
+  .field-foot{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+  .counter{font-size:12px;color:var(--muted);margin-left:auto;white-space:nowrap}
+  .counter.limit{color:var(--danger)}
+  .req-note{font-size:13px;color:var(--muted);margin:0}
+  .field label{font-size:14px;font-weight:600;margin-bottom:2px}
+  .req{color:var(--marker);font-weight:700}
+  .form-card form{display:grid;gap:14px}
+  .form-card form[hidden]{display:none}
+  .sent{display:grid;justify-items:center;text-align:center;gap:12px;padding:40px 12px}
+  .sent[hidden]{display:none}
+  .sent-icon{width:72px;height:72px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;animation:fly .6s ease-out}
+  .sent-icon svg{width:32px;height:32px}
+  .sent h3{font-size:22px;margin:4px 0 0}
+  .sent .muted{max-width:340px}
+  @keyframes fly{from{transform:translate(-18px,18px) scale(.6);opacity:0}to{transform:none;opacity:1}}
+  #form-status.error{color:var(--danger)}
+
+  form .btn:disabled{opacity:.45;cursor:not-allowed;transform:none;background:var(--accent);border-color:var(--accent)}
+
+  footer{padding:32px 0;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
+  footer .container{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  footer strong{color:var(--ink);font-weight:700}
+  .gc-views{background:none;border:0;padding:0;margin:0;font:inherit;font-size:12px;color:inherit;opacity:.55;cursor:pointer;display:inline-flex;align-items:center;gap:5px}
+  .gc-views[hidden]{display:none}
+  .gc-views:hover,.gc-views:focus-visible{opacity:.85}
+  .gc-views svg{width:13px;height:13px;flex:none}
+  .gc-views .gc-n{filter:blur(4px);transition:filter .3s;user-select:none}
+  .gc-views.is-open .gc-n{filter:none;user-select:auto}
+
+  @media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto!important}}
+  @media (max-width:560px){
+    #projects .project{padding:18px 20px;cursor:pointer}
+    #projects .project h3{margin:0;display:flex;justify-content:space-between;align-items:center;gap:12px}
+    #projects .project h3::after{content:"";width:9px;height:9px;border-right:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(45deg);transition:transform .2s;flex:none;margin-top:-4px}
+    #projects .project.open h3::after{transform:rotate(-135deg);margin-top:4px}
+    #projects .project .muted,#projects .project .link{display:none}
+    #projects .project.open .muted{display:block;margin-top:10px}
+    #projects .project.open .link{display:inline-block}
+    #projects .grid{gap:10px}
+  }
+</style>
+</head>
+<body id="page-top">
+
+<header>
+  <div class="container nav">
+    <a class="logo" href="#page-top"><span class="logo-mark" aria-hidden="true"></span><span class="sr-only">Dariia Rusanova</span></a>
+    <div class="nav-right">
+    <button class="burger" aria-label="Menu" onclick="document.querySelector('.menu').classList.toggle('open')">&#9776;</button>
+    <ul class="menu" onclick="this.classList.remove('open')">
+      <li><a href="#profile">Profile</a></li>
+      <li><a href="#directions">Focus areas</a></li>
+      <li><a href="#cases">Cases</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#reviews">Testimonials</a></li>
+      <li><a href="#contacts">Contacts</a></li>
+    </ul>
+    <a class="lang" href="/" hreflang="ru" lang="ru">RU</a>
+    </div>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow">Dariia Rusanova</div>
+      <h1>QA Lead in <span>travel‑tech</span></h1>
+      <p class="lead">Testing, documentation and QA processes for B2C and B2B products</p>
+      <div class="btns">
+        <a class="btn" href="https://t.me/dariiarus" target="_blank" rel="noopener">Telegram</a>
+        <a class="btn ghost" href="mailto:dariiarusanova@gmail.com">Email</a>
+      </div>
+      <div class="stats" id="profile-stats">
+        <div class="stat"><b id="years-num">6</b><span id="years-word">years in QA</span></div>
+        <div class="stat"><b>25+</b><span>network websites</span></div>
+        <div class="stat"><b>B2C &amp; B2B</b><span>products</span></div>
+      </div>
+    </div>
+    <div class="photo"><img src="/assets/photo.jpg" alt="Dariia Rusanova" width="1200" height="949"></div>
+  </div>
+</div>
+
+<section id="profile" class="alt">
+  <div class="container">
+    <div class="sec-head"><h2>Profile</h2></div>
+    <p class="profile-text">QA experience since 2020. Testing key sales scenarios, product documentation and building QA processes in B2C and B2B products. Interested in analytics and UI testing.</p>
+  </div>
+</section>
+
+<section id="directions">
+  <div class="container">
+    <div class="sec-head"><h2>Focus areas</h2></div>
+    <div class="grid g4">
+      <div class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></div><h3>Manual testing</h3><p class="muted">Thorough pre-release functional testing: defects are found before users run into them.</p></div>
+      <div class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6h11M9 12h11M9 18h11"/><path d="m3 6 1.5 1.5L7 5M3 12l1.5 1.5L7 11M3 18l1.5 1.5L7 17"/></svg></div><h3>Checklists and test cases</h3><p class="muted">Coverage of requirements and user scenarios, tracking changes between test and retest.</p></div>
+      <div class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></div><h3>Technical documentation</h3><p class="muted">Creating and maintaining documentation tailored to the product.</p></div>
+      <div class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M8 7.5 10.5 16M16 7.5 13.5 16M8.5 6h7"/></svg></div><h3>QA processes</h3><p class="muted">Standards for tasks and bug reports, coordinating the testing team.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="cases" class="alt">
+  <div class="container">
+    <div class="sec-head"><h2>Cases</h2></div>
+    <div class="grid g2">
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="9" cy="6" r="2" fill="currentColor"/><circle cx="15" cy="12" r="2" fill="currentColor"/><circle cx="10" cy="18" r="2" fill="currentColor"/></svg></div>
+        <h3>Building an internal settings service for a website network</h3>
+        <p class="muted">Full cycle: shaping the request, specification, testing, project documentation. A single source of settings for 25+ network websites for product managers, developers and QA: verifying changes before release and preparing new market launches - 6 operating modes.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h3l2.5 12h12l2-8H6.5"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg></div>
+        <h3>Full-cycle QA and documentation in a large travel-tech project</h3>
+        <p class="muted">QA of revenue-critical B2C and B2B scenarios - from authorization and search to a completed booking and its follow-up in chat. Documentation covering the entire project.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg></div>
+        <h3>AI-assisted QA</h3>
+        <p class="muted">Checklists from tasks, documentation audits, comment triage and team task tracking with Claude.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M7 10l2 2 3-3M7 15.5h4M14 10h3M14 15.5h3"/></svg></div>
+        <h3>QA / Project setup for small projects</h3>
+        <p class="muted">Building the process: project task management, frontend and backend specifications, task prioritization and testing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container">
+    <div class="sec-head"><h2>Skills</h2></div>
+    <div class="skills-wrap">
+      <div class="grid g3 groups">
+        <div class="card group">
+          <div class="group-title">Testing</div>
+          <div class="sk"><h3>Testing techniques</h3><p class="muted">Pairwise testing, decision tables, testing with many variable parameters.</p></div>
+          <div class="sk"><h3>API testing</h3><p class="muted">Checking client-to-server requests and responses; a map of API methods by screen and component.</p></div>
+          <div class="sk"><h3>CRM testing</h3><p class="muted">Functionality, performance, security and usability of CRM systems.</p></div>
+          <div class="sk"><h3>Google Analytics</h3><p class="muted">Verifying event tracking setup.</p></div>
+        </div>
+        <div class="card group">
+          <div class="group-title">Documentation</div>
+          <div class="sk"><h3>Product documentation</h3><p class="muted">Documentation for large and small projects: structure, navigation, API and notification tables, built-in checklists.</p></div>
+          <div class="sk"><h3>Writing specifications</h3><p class="muted">Requirements for new features, refinement with developers, documentation and acceptance testing.</p></div>
+          <div class="sk"><h3>Test management</h3><p class="muted">Checklists and test cases in Qase, TestRail, Excel and other tools.</p></div>
+        </div>
+        <div class="card group">
+          <div class="group-title">Processes</div>
+          <div class="sk"><h3>QA process standards</h3><p class="muted">Rules for tasks and bug reports, linking tasks to documentation.</p></div>
+          <div class="sk"><h3>Test coordination</h3><p class="muted">Moving tasks through the QA team, statuses, tester workload dashboards.</p></div>
+          <div class="sk"><h3>AI-assisted QA</h3><p class="muted">Generating checklists, documentation audits, comment triage, preparing tasks according to team rules.</p></div>
+        </div>
+      </div>
+      <div class="grid g2 bottom-row">
+      <div class="card domain">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg></div>
+        <div><h3>Travel-tech domain</h3><p class="muted">Tour operator platform: search, booking, orders, chats, authorization, agency CRM. B2C and B2B.</p></div>
+      </div>
+      <div class="card tools">
+        <h3>Tools</h3>
+        <ul class="chips"><li><span class="ti" style="--i:url(https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/clickup.svg)" aria-hidden="true"></span>ClickUp</li><li><span class="ti" style="--i:url(https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/jira.svg)" aria-hidden="true"></span>Jira</li><li><span class="ti" style="--i:url(https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/qase.svg)" aria-hidden="true"></span>Qase</li><li><span class="ti" style="--i:url(https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/testrail.svg)" aria-hidden="true"></span>TestRail</li><li><span class="ti" style="--i:url(https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/googlesheets.svg)" aria-hidden="true"></span>Google Sheets</li><li><span class="ti" style="--i:url(https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/postman.svg)" aria-hidden="true"></span>Postman</li><li><span class="ti" style="--i:url(https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/googlechrome.svg)" aria-hidden="true"></span>DevTools</li><li><span class="ti" style="--i:url(https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/claude.svg)" aria-hidden="true"></span>Claude</li></ul>
+        <p class="muted tools-sub">Website builders:</p>
+        <ul class="chips"><li><span class="ti" style="--i:url(https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/wordpress.svg)" aria-hidden="true"></span>WordPress</li><li>Site123</li><li>Tilda</li></ul>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="alt">
+  <div class="container">
+    <div class="sec-head"><h2>Projects</h2></div>
+    <div class="grid g3">
+      <div class="card project"><div class="role">QA Lead</div><h3>Anex Tour</h3><p class="muted">Travel. Websites and services for B2C and B2B. Leading the testing team, QA processes, documentation (international project).<br>https://anextour.ru/</p><a class="link" href="https://www.anextour.com/" target="_blank" rel="noopener">anextour.com →</a></div>
+      <div class="card project"><div class="role">QA / Project setup</div><h3>ZoomFilm</h3><p class="muted">Media. News portal about cinema and film industry professionals. Building the process: task management, specifications, testing, documentation (Russia).</p><a class="link" href="https://zoom.film/" target="_blank" rel="noopener">zoom.film →</a></div>
+      <div class="card project"><div class="role">QA / Project setup</div><h3>Tactic</h3><p class="muted">Entertainment and e-commerce. Online quizzes, offline game landing pages, online store. Building the process: task management, specifications, testing, documentation (Russia).</p><a class="link" href="https://tactic.team/" target="_blank" rel="noopener">tactic.team →</a></div>
+      <div class="card project"><div class="role">QA / Project setup</div><h3>Hunrizon</h3><p class="muted">Legal. Legal services website. Building the process: task management, specifications, testing, documentation (Hungary).</p><a class="link" href="https://www.hunrizon.com/" target="_blank" rel="noopener">hunrizon.com →</a></div>
+      <div class="card project"><div class="role">QA / Project setup</div><h3>Paylun</h3><p class="muted">Cleaning. Website of the largest cleaning company in Armenia. Building the process: task management, specifications, testing, documentation (Armenia).</p><a class="link" href="https://paylun.am/" target="_blank" rel="noopener">paylun.am →</a></div>
+      <div class="card project"><div class="role">QA / Project setup</div><h3>Other projects</h3><p class="muted">Websites on WordPress, Tilda, Site123, CRM testing. Task management, specifications, testing, documentation.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="container">
+    <div class="sec-head"><h2>Education</h2></div>
+    <div class="grid g2">
+      <div class="card group">
+        <div class="group-title">Higher education</div>
+          <div class="sk"><h3>Geekbrains</h3><p class="muted">IT, software testing</p></div>
+          <div class="sk"><h3>IIP</h3><p class="muted">Psychology, psychologist</p></div>
+          <div class="sk"><h3>Moscow Psychological and Social University</h3><p class="muted">Socio-cultural service and tourism, service and tourism specialist</p></div>
+          <div class="sk"><h3>Moscow Psychological and Social University</h3><p class="muted">Psychology, Bachelor of Psychology</p></div>
+      </div>
+      <div class="card group">
+        <div class="group-title">Courses and certificates</div>
+        <ul class="chips edu-chips"><li>ITEA - Software testing</li><li>SQL basics</li><li>Databases</li><li>Computer networks</li><li>Git</li><li>Jira and Confluence</li><li>Web application testing</li><li>Customer experience management</li><li>Java Core for testers</li><li>HTML/CSS for testers</li><li>Linux basic commands</li><li>Manual testing fundamentals</li><li>Test analysis fundamentals</li></ul>
+        <div class="group-title langs-title">Languages</div>
+        <ul class="chips"><li>Russian - native</li><li>English - B2</li><li>Spanish - A1</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews" class="alt">
+  <div class="container">
+    <div class="sec-head"><h2>Testimonials</h2></div>
+    <div class="grid g3">
+      <div class="card review"><div class="stars">★★★★★</div><blockquote>Dariia is like a bloodhound - she senses where a bug might be hiding, has an analytical mind and a great capacity for work. Only a quality product reaches the user.</blockquote><div class="who"><div class="avatar">M</div><div><b>Marina V.</b><span>Head of Online Marketing</span><br><a href="https://www.anextour.com/" target="_blank" rel="noopener">anextour.com</a></div></div></div>
+      <div class="card review"><div class="stars">★★★★★</div><blockquote>Dariia is a professional who can structure large amounts of information and join at any stage of development. An indispensable team member.</blockquote><div class="who"><div class="avatar">S</div><div><b>Sergey G.</b><span>CEO</span><br><a href="https://tactic.team/" target="_blank" rel="noopener">tactic.team</a></div></div></div>
+      <div class="card review"><div class="stars">★★★★★</div><blockquote>I am impressed by Dariia's expertise and dedication. The results consistently exceed expectations, and her support has become an important part of our success.</blockquote><div class="who"><div class="avatar">K</div><div><b>Ksenia S.</b><span>Head of Partnerships</span><br><a href="https://hunrizon.com/" target="_blank" rel="noopener">hunrizon.com</a></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="contacts">
+  <div class="container">
+    <div class="sec-head"><h2>Contacts</h2></div>
+    <div class="contacts">
+      <div class="card">
+        <ul class="clist">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Moscow, Russia</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><a href="tel:+79776495868">+7 977 649-58-68</a></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><a href="mailto:dariiarusanova@gmail.com">dariiarusanova@gmail.com</a></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Mon-Sun 10:00-21:00 (GMT+3)</li>
+        </ul>
+        <div class="notes">
+          <p>Open to relocation</p>
+          <p>Preferred language of communication - Russian</p>
+        </div>
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/dariia-rusanova-qalead/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></a>
+          <a href="https://hh.ru/resume/497e3679ff0932173a0039ed1f4c5a73626f36" target="_blank" rel="noopener" aria-label="Resume on hh.ru"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M5.5 17c.6-2 2-3 3.5-3s2.9 1 3.5 3M14 9h4M14 13h4"/></svg></a>
+          <a href="https://github.com/dariiarusanova" target="_blank" rel="noopener" aria-label="GitHub"><span class="ti" style="--i:url(https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/github.svg);width:20px;height:20px;background:currentColor" aria-hidden="true"></span></a>
+          <a href="https://t.me/dariiarus" target="_blank" rel="noopener" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3 18.6 20c-.2 1.1-.9 1.4-1.8.9l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.2-8.3c.4-.4-.1-.6-.6-.2L6.1 13.6 1.2 12c-1.1-.3-1.1-1.1.2-1.6L20.5 3c.9-.3 1.7.2 1.4 1.3z"/></svg></a>
+        </div>
+      </div>
+      <div class="card form-card">
+      <form id="contact-form" novalidate>
+        <div class="row">
+          <div class="field">
+            <label for="f-name">Name</label>
+            <input id="f-name" type="text" name="name" placeholder="Your name" maxlength="90" autocomplete="name" aria-describedby="err-name">
+            <p class="err" id="err-name" aria-live="polite"></p>
+          </div>
+          <div class="field">
+            <label for="f-phone">Phone</label>
+            <input id="f-phone" type="tel" name="phone" placeholder="+" maxlength="12" inputmode="tel" autocomplete="tel" aria-describedby="err-phone">
+            <p class="err" id="err-phone" aria-live="polite"></p>
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-email">Email <span class="req" aria-hidden="true">*</span></label>
+          <input id="f-email" type="email" name="email" placeholder="name@mail.com" maxlength="254" autocomplete="email" required aria-required="true" aria-describedby="err-email">
+          <p class="err" id="err-email" aria-live="polite"></p>
+        </div>
+        <div class="field">
+          <label for="f-message">Message <span class="req" aria-hidden="true">*</span></label>
+          <textarea id="f-message" name="message" placeholder="Briefly describe your task or question" maxlength="499" required aria-required="true" aria-describedby="err-message"></textarea>
+          <div class="field-foot"><p class="err" id="err-message" aria-live="polite"></p><span class="counter" id="msg-counter">0/499</span></div>
+        </div>
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+        <p class="req-note"><span class="req">*</span> - required fields</p>
+        <button class="btn" type="submit" disabled>Send</button>
+        <p id="form-status" role="status"></p>
+      </form>
+      <div class="sent" id="form-sent" hidden>
+        <div class="sent-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/></svg></div>
+        <h3 id="sent-title">Your message is on its way</h3>
+        <p class="muted" id="sent-text">Thanks for your interest! A reply will arrive at the email you provided soon.</p>
+        <button class="btn ghost" type="button" id="send-more">Send another</button>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <span><strong>Dariia Rusanova</strong></span>
+    <span>Copyright © <span id="year">2026</span> All rights reserved</span>
+    <button type="button" class="gc-views" id="gc-views" aria-label="Site views" title="Site views" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg><span class="gc-n"></span></button>
+  </div>
+</footer>
+
+<script>
+  // Years in QA - counted from July 2020
+  (function(){
+    var start = new Date(2020, 6, 1);
+    var now = new Date();
+    var y = now.getFullYear() - start.getFullYear();
+    if (now.getMonth() < start.getMonth()) y--;
+    document.getElementById('years-num').textContent = y;
+    document.getElementById('years-word').textContent = (y === 1 ? 'year' : 'years') + ' in QA';
+    document.getElementById('year').textContent = now.getFullYear();
+  })();
+
+  // Form: validation + sending via FormSubmit (email)
+  (function(){
+    var M = {
+      ru: {
+        required: 'Обязательное поле',
+        name: 'Только буквы (кириллица, латиница), пробел и дефис',
+        phone: 'Введите номер полностью: + и 11 цифр',
+        email: 'Введите корректный email, например name@mail.ru',
+        sql: 'Похоже на SQL-код - такое сообщение отправить нельзя',
+        sending: 'Отправляем...',
+        activate: 'Форма ещё не активирована: на почту владельца сайта отправлено письмо для активации FormSubmit.',
+        fail: 'Could not send the message. Please email dariiarusanova@gmail.com',
+        subject: 'Сообщение с сайта',
+        keys: ['Имя', 'Телефон', 'Email', 'Сообщение']
+      },
+      en: {
+        required: 'This field is required',
+        name: 'Letters only (Cyrillic, Latin), spaces and hyphens',
+        phone: 'Enter the full number: + and 11 digits',
+        email: 'Enter a valid email, e.g. name@mail.com',
+        sql: 'This looks like SQL code - the message cannot be sent',
+        sending: 'Sending...',
+        activate: 'The form is not activated yet: an activation email from FormSubmit has been sent to the site owner.',
+        fail: 'Could not send the message. Please email dariiarusanova@gmail.com',
+        subject: 'Message from website (EN)',
+        keys: ['Name', 'Phone', 'Email', 'Message']
+      }
+    }[document.documentElement.lang] ;
+
+    var f = document.getElementById('contact-form');
+    var sent = document.getElementById('form-sent');
+    document.getElementById('send-more').addEventListener('click', function(){ sent.hidden = true; f.hidden = false; f.name.focus(); update(); });
+    var btn = f.querySelector('button[type=submit]');
+    var st = document.getElementById('form-status');
+    var counter = document.getElementById('msg-counter');
+    var touched = {};
+    var nameStripped = false;
+
+    var NAME_BAD = /[^A-Za-zА-Яа-яЁё \-]/g;
+    var EMAIL_OK = /^[^\s@]+@[^\s@.]+(\.[^\s@.]+)*\.[A-Za-zА-Яа-я]{2,}$/;
+    var SQL = [
+      /\bselect\b[\s\S]{0,200}\bfrom\b/i,
+      /\binsert\s+into\b/i,
+      /\bupdate\b[\s\S]{0,100}\bset\b[\s\S]{0,100}=/i,
+      /\bdelete\s+from\b/i,
+      /\b(drop|truncate|alter)\s+(table|database|schema|view|index|user)\b/i,
+      /\bcreate\s+(table|database|schema|view|index|procedure|function|trigger|user)\b/i,
+      /\bunion(\s+all)?\s+select\b/i,
+      /\b(exec|execute)\s*(\(|xp_|sp_)/i,
+      /\b(information_schema|sysobjects|pg_sleep|waitfor\s+delay)\b/i,
+      /\b(sleep|benchmark)\s*\(/i,
+      /['"`]\s*(or|and)\s+['"`]?\w+['"`]?\s*=\s*['"`]?\w+/i,
+      /;\s*--|'\s*--|\/\*[\s\S]*?\*\//
+    ];
+    function isSql(v){ return SQL.some(function(r){ return r.test(v); }); }
+
+    function check(name){
+      var v = f[name].value;
+      switch(name){
+        case 'name':  return nameStripped ? M.name : '';
+        case 'phone': var d = v.replace(/\D/g,''); return d.length && d.length < 11 ? M.phone : '';
+        case 'email': v = v.trim(); return !v ? M.required : (EMAIL_OK.test(v) ? '' : M.email);
+        case 'message': return !v.trim() ? M.required : (isSql(v) ? M.sql : '');
+      }
+    }
+    function show(name, force){
+      var msg = check(name);
+      var visible = msg && (touched[name] || force || msg === M.sql || msg === M.name);
+      f[name].classList.toggle('invalid', !!visible);
+      f[name].setAttribute('aria-invalid', visible ? 'true' : 'false');
+      document.getElementById('err-' + name).textContent = visible ? msg : '';
+      return !msg;
+    }
+    function update(){
+      var ok = ['name','phone','email','message'].map(function(n){ return !check(n); }).every(Boolean);
+      btn.disabled = !ok;
+    }
+
+    f.name.addEventListener('input', function(){
+      var v = f.name.value, clean = v.replace(NAME_BAD, '').slice(0, 90);
+      nameStripped = clean !== v;
+      if (nameStripped) f.name.value = clean;
+      show('name'); update();
+    });
+    f.name.addEventListener('blur', function(){ nameStripped = false; show('name'); });
+
+    f.phone.addEventListener('input', function(){
+      var d = f.phone.value.replace(/\D/g,'').slice(0, 11);
+      f.phone.value = d ? '+' + d : '';
+      show('phone'); update();
+    });
+    f.phone.addEventListener('focus', function(){ if (!f.phone.value) f.phone.value = '+'; });
+    f.phone.addEventListener('blur', function(){ if (f.phone.value === '+') f.phone.value = ''; touched.phone = true; show('phone'); update(); });
+
+    f.email.addEventListener('input', function(){ show('email'); update(); });
+    f.email.addEventListener('blur', function(){ touched.email = true; show('email'); });
+
+    f.message.addEventListener('input', function(){
+      var n = f.message.value.length;
+      counter.textContent = n + '/499';
+      counter.classList.toggle('limit', n >= 499);
+      show('message'); update();
+    });
+    f.message.addEventListener('blur', function(){ touched.message = true; show('message'); });
+
+    f.addEventListener('submit', function(e){
+      e.preventDefault();
+      if (f._honey.value) return;
+      var ok = ['name','phone','email','message'].map(function(n){ return show(n, true); }).every(Boolean);
+      if (!ok) { update(); return; }
+      btn.disabled = true; st.className = ''; st.textContent = M.sending;
+      var data = { _subject: M.subject, _template: 'table' };
+      data[M.keys[0]] = f.name.value.trim();
+      data[M.keys[1]] = f.phone.value;
+      data[M.keys[2]] = f.email.value.trim();
+      data[M.keys[3]] = f.message.value.trim();
+      data._replyto = f.email.value.trim();
+      fetch('https://formsubmit.co/ajax/dariiarusanova@gmail.com', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+        body: JSON.stringify(data)
+      }).then(function(r){ return r.json(); }).then(function(d){
+        if (d.success === 'true' || d.success === true) {
+          st.textContent = ''; f.reset(); touched = {}; counter.textContent = '0/499';
+          ['name','phone','email','message'].forEach(function(n){ show(n); });
+          f.hidden = true; sent.hidden = false; sent.querySelector('button').focus();
+        } else { throw new Error(d.message || ''); }
+      }).catch(function(err){
+        st.className = 'error';
+        st.textContent = /activat/i.test(err && err.message) ? M.activate : M.fail;
+      })
+        .finally(function(){ update(); });
+    });
+
+    update();
+  })();
+
+  // Reveal blocks on scroll
+  (function(){
+    var io = null;
+    if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      var els = document.querySelectorAll('section .sec-head, section .card, .profile-text');
+      io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (!e.isIntersecting) return;
+          var sib = Array.prototype.indexOf.call(e.target.parentElement.children, e.target);
+          e.target.style.animationDelay = Math.min(sib, 5) * 70 + 'ms';
+          e.target.classList.add('in'); io.unobserve(e.target);
+        });
+      }, {rootMargin: '0px 0px -8% 0px'});
+      els.forEach(function(el){ el.classList.add('reveal'); io.observe(el); });
+    }
+
+    // Menu jump: target section is shown at once, no empty screen during animation
+    var links = Array.prototype.slice.call(document.querySelectorAll('.menu a[href^="#"]'));
+    function showNow(sec){
+      if (!sec) return;
+      sec.querySelectorAll('.reveal').forEach(function(el){
+        el.classList.add('in','instant'); if (io) io.unobserve(el);
+      });
+    }
+    links.forEach(function(a){
+      a.addEventListener('click', function(){ showNow(document.querySelector(a.getAttribute('href'))); });
+    });
+    if (location.hash) showNow(document.querySelector(location.hash));
+
+    // Scroll-spy: highlight the section whose heading is just under the header
+    var secs = Array.prototype.slice.call(document.querySelectorAll('section[id]')).filter(function(x){ return map(x.id); });
+    function map(id){ for (var i=0;i<links.length;i++) if (links[i].getAttribute('href') === '#'+id) return links[i]; return null; }
+    var ticking = false;
+    function spy(){
+      ticking = false;
+      var cur = null, line = 160;
+      secs.forEach(function(x){ if (x.getBoundingClientRect().top <= line) cur = x; });
+      if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) cur = secs[secs.length-1];
+      links.forEach(function(l){ l.classList.remove('active'); });
+      if (cur) map(cur.id).classList.add('active');
+    }
+    addEventListener('scroll', function(){ if (!ticking) { ticking = true; requestAnimationFrame(spy); } }, {passive:true});
+    spy();
+  })();
+  (function(){ if(!matchMedia('(max-width:560px)').matches) return;
+    document.querySelectorAll('#projects .project').forEach(function(c,i){ if(i===0) c.classList.add('open');
+      c.addEventListener('click',function(e){ if(e.target.closest('a')) return; c.classList.toggle('open'); }); }); })();
+</script>
+<script data-goatcounter="https://dariiarusanova.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script>
+  (function(){ var b=document.getElementById('gc-views'); if(!b) return;
+    fetch('https://dariiarusanova.goatcounter.com/counter/TOTAL.json')
+      .then(function(r){ if(!r.ok) throw 0; return r.json(); })
+      .then(function(d){ b.querySelector('.gc-n').textContent=d.count; b.hidden=false; })
+      .catch(function(){});
+    b.addEventListener('click',function(){ b.classList.toggle('is-open'); }); })();
+</script>
+</body>
+</html>
